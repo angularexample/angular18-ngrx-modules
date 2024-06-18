@@ -25,3 +25,57 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Setup after new
+
+### Purpose - Coding Test
+This is a coding assignment from my interview with Citibank.
+
+#### Description of Required Web App
+
+##### Get Users and Posts from JSONPlaceholder
+
+Use the mock API here:
+
+https://jsonplaceholder.typicode.com/
+
+Users data source:
+
+https://jsonplaceholder.typicode.com/users
+
+Posts data source:
+
+https://jsonplaceholder.typicode.com/posts
+
+
+##### Initial view - Users
+
+Show a table of all users. User name is enough.
+
+When the user clicks a row, navigate to the next view,
+
+where you will see the posts for the selected user.
+
+##### Posts view
+
+Show a table of all posts by a given user. Post Title is enough.
+
+When the user clicks on a row, show a form to edit the selected post.
+
+###### Post Form
+
+Form fields:
+
+title
+
+body
+
+Save button
+
+When the user clicks the save button,
+the form data will be used to update the back end, using the API.
+
+https://jsonplaceholder.typicode.com/guide/
+
+See the HTTP PUT example in the guide.
+

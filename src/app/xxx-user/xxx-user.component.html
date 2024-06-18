@@ -1,0 +1,12 @@
+<main>
+<div>Select a User to View/Edit Posts</div>
+
+<table *ngIf="">
+  <tr *ngFor="let user of users$ | async ; index as i;" (click)="rowClick(user)">
+    <th>ID</th>
+    <td>{{user.id}}</td>
+    <th>Name</th>
+    <td>{{user.name}}</td>
+  </tr>
+</table>
+</main>

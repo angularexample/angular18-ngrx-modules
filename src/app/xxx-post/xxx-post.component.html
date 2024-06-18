@@ -1,0 +1,33 @@
+<main>
+  <section>
+    <h1>User Posts</h1>
+    <ng-template *ngIf="(isNoSelectedUser$ | async); else xxxNoSelectedUser">
+      <div>Select a Post to View/Edit</div>
+      <table>
+        <tr *ngFor="let post of posts$ | async ; index as i;" (click)="selectPost(post)">
+          <th>ID</th>
+          <td>{{post.id}}</td>
+          <th>Name</th>
+          <td>{{post.title}}</td>
+        </tr>
+      </table>
+    </ng-template>
+  </section>
+  <section>
+    <h2>Edit Post</h2>
+    <form formGroup="{{postForm}}">
+      <div class="xxx-form-row">
+        <div class="xxx-form-caption">id</div>
+        <div class="xxx-form-text-value">{{post.id}}</div>
+
+      </div>
+      <input type="text" formControlName="title" placeholder="Title">
+      <input type="text" formControlName="body" placeholder="Body">
+    </form>
+  </section>
+</main>
+
+<ng-template #xxxNoSelectedUser>
+  <div>There is no selected user.</div>
+  <div>Go to User page to select a user.</div>
+</ng-template>
