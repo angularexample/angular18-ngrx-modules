@@ -1,6 +1,7 @@
 import {XxxUser, XxxUserState} from "./xxx-user.types";
 
 export const xxxGetUsers = (state: XxxUserState) => {
+  debugger
   return {
     ...state,
     isUsersLoading: true,
