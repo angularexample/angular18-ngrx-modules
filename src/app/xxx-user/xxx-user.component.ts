@@ -14,7 +14,6 @@ export class XxxUserComponent {
   users$: Observable<XxxUser[]> | undefined;
 
   constructor(private xxxUserFacadeService: XxxUserFacadeService) {
-    debugger
     this.registerObservables();
     this.xxxUserFacadeService.dispatchGetUsers();
   }
