@@ -5,7 +5,10 @@ export const selectUserState = createFeatureSelector<XxxUserState>(xxxUserFeatur
 
 export const selectIsUsersLoading = createSelector(
   selectUserState,
-  (state: XxxUserState) => state.isUsersLoading
+  // (state: XxxUserState) => state.isUsersLoading
+  (state: XxxUserState) => {
+    debugger
+    return state.isUsersLoading}
 );
 
 export const selectSelectedUserId = createSelector(
@@ -21,7 +24,11 @@ export const selectUsers = createSelector(
 export const selectIsUsersLoaded = createSelector(
   selectIsUsersLoading,
   selectUsers,
-  (isLoading: boolean, users: XxxUser[]) => isLoading && users && users.length > 0
+  // (isLoading: boolean, users: XxxUser[]) => isLoading && users && users.length > 0
+  (isLoading: boolean, users: XxxUser[]) => {
+    debugger;
+    return isLoading && users && users.length > 0
+  }
 );
 
 export const selectIsNoSelectedUser = createSelector(
