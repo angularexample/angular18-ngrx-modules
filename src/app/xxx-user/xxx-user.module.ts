@@ -6,6 +6,7 @@ import {xxxUserReducer} from "./xxx-user.reducer";
 import {XxxUserComponent} from "./xxx-user.component";
 import {xxxUserFeatureName} from "./xxx-user.types";
 import {XxxUserEffects} from "./xxx-user.effects";
+import {XxxUserRoutingModule} from "./xxx-user-routing.module";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {XxxUserEffects} from "./xxx-user.effects";
   ],
   imports: [
     HttpClientModule,
+    XxxUserRoutingModule,
     StoreModule.forFeature(xxxUserFeatureName, {xxxUserReducer: xxxUserReducer}),
     EffectsModule.forFeature([XxxUserEffects]),
   ],
