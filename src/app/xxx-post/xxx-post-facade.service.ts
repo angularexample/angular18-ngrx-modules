@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {XxxPost} from "./xxx-post.types";
 import {Store} from "@ngrx/store";
 import * as XxxPostActions from './xxx-post.actions';
@@ -9,11 +9,12 @@ import * as XxxPostSelectors from './xxx-post.selectors';
   providedIn: 'root'
 })
 export class XxxPostFacadeService {
-  isNoSelectedUser$: Observable<boolean> | undefined;
-  isPostsLoaded$: Observable<boolean> | undefined;
-  isPostsLoading$: Observable<boolean> | undefined;
-  isPostUpdating$: Observable<boolean> | undefined;
-  posts$: Observable<XxxPost[]> | undefined;
+  isSelectedUser$: Observable<boolean> = of(false);
+  isUserState$: Observable<boolean> = of(false);
+  isPostsLoaded$: Observable<boolean> = of(false);
+  isPostsLoading$: Observable<boolean> = of(false);
+  isPostUpdating$: Observable<boolean> = of(false);
+  posts$: Observable<XxxPost[]> = of([]);
 
   constructor(private store: Store) {
     this.registerObservables();
@@ -32,7 +33,8 @@ export class XxxPostFacadeService {
   }
 
   private registerObservables(): void {
-    this.isNoSelectedUser$ = this.store.select(XxxPostSelectors.selectIsNoSelectedUser);
+    this.isSelectedUser$ = this.store.select(XxxPostSelectors.selectIsSelectedUser);
+    this.isUserState$ = this.store.select(XxxPostSelectors.selectIsUserState);
     this.isPostsLoaded$ = this.store.select(XxxPostSelectors.selectIsPostsLoaded);
     this.isPostsLoading$ = this.store.select(XxxPostSelectors.selectIsPostsLoading);
     this.isPostUpdating$ = this.store.select(XxxPostSelectors.selectIsPostUpdating);

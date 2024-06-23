@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
+import {AsyncPipe, CommonModule, JsonPipe} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {XxxUserComponent} from "./xxx-user.component";
 import {XxxUserRoutingModule} from "./xxx-user-routing.module";
-import {AsyncPipe, JsonPipe} from "@angular/common";
 import {XxxUserStateModule} from "./xxx-user.state.module";
 
 @NgModule({
@@ -10,6 +10,7 @@ import {XxxUserStateModule} from "./xxx-user.state.module";
     XxxUserComponent
   ],
   imports: [
+    CommonModule,
     HttpClientModule,
     XxxUserRoutingModule,
     XxxUserStateModule,

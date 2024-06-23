@@ -1,13 +1,12 @@
 <main>
-<div>Select a User to View/Edit Posts</div>
-<div *ngIf="isUsersLoading$|async">Loading...</div>
-<table *ngIf="isUsersLoaded$|async">
-  <tr *ngFor="let user of users$ | async ; index as i;" (click)="rowClick(user)">
-    <pre>{{user|json}}</pre>
-    <th>ID</th>
-    <td>{{user.id}}</td>
-    <th>Name</th>
-    <td>{{user.name}}</td>
-  </tr>
-</table>
+  <div>Select a User to View/Edit Posts</div>
+  <div *ngIf="isUsersLoading$|async">Loading...</div>
+  <table *ngIf="isUsersLoaded$|async"  class="xxx-table">
+    <tr *ngFor="let user of users$ | async" class="xxx-table-row" (click)="rowClick(user)">
+      <th class="xxx-table-cell-header">ID</th>
+      <td class="xxx-table-cell">{{ user.id }}</td>
+      <th class="xxx-table-cell-header">Name</th>
+      <td class="xxx-table-cell">{{ user.name }}</td>
+    </tr>
+  </table>
 </main>

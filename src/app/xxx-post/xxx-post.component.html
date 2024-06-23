@@ -1,29 +1,30 @@
 <main>
   <section>
     <h1>User Posts</h1>
-    <ng-template *ngIf="(isNoSelectedUser$ | async); else xxxNoSelectedUser">
+    <pre>isSelectedUser$: {{(isSelectedUser$ | async |json)}}</pre>
+    <ng-template *ngIf="(isSelectedUser$ | async); else xxxNoSelectedUser">
       <div>Select a Post to View/Edit</div>
       <table>
-        <tr *ngFor="let post of posts$ | async ; index as i;" (click)="selectPost(post)">
+        <tr *ngFor="let post of posts$ | async" (click)="selectPost(post)">
           <th>ID</th>
           <td>{{post.id}}</td>
           <th>Name</th>
           <td>{{post.title}}</td>
         </tr>
       </table>
-    </ng-template>
-  </section>
-  <section>
-    <h2>Edit Post</h2>
-    <form formGroup="{{postForm}}">
-      <div class="xxx-form-row">
-        <div class="xxx-form-caption">id</div>
-        <div class="xxx-form-text-value">{{post.id}}</div>
+      <section>
+        <h2>Edit Post</h2>
+        <form [formGroup]="postForm">
+          <div class="xxx-form-row">
+            <div class="xxx-form-caption">id</div>
+            <!--        <div class="xxx-form-text-value">{{post.id}}</div>-->
 
-      </div>
-      <input type="text" formControlName="title" placeholder="Title">
-      <input type="text" formControlName="body" placeholder="Body">
-    </form>
+          </div>
+          <input type="text" formControlName="title" placeholder="Title">
+          <input type="text" formControlName="body" placeholder="Body">
+        </form>
+      </section>
+    </ng-template>
   </section>
 </main>
 

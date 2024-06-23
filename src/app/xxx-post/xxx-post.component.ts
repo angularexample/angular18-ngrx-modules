@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {XxxPost} from "./xxx-post.types";
 import {XxxPostFacadeService} from "./xxx-post-facade.service";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -10,18 +10,20 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./xxx-post.component.scss']
 })
 export class XxxPostComponent {
-  isNoSelectedUser$: Observable<boolean> | undefined;
-  isPostsLoaded$: Observable<boolean> | undefined;
-  isPostsLoading$: Observable<boolean> | undefined;
-  isUserPostLoading$: Observable<boolean> | undefined;
+  isSelectedUser$: Observable<boolean> = of(false);
+  isPostsLoaded$: Observable<boolean>= of(false);
+  isPostsLoading$: Observable<boolean> = of(false);
+  isUserPostLoading$: Observable<boolean> = of(false);
   newPost: XxxPost | undefined;
-  postForm: FormGroup | undefined;
-  posts$: Observable<XxxPost[]> | undefined;
+  postForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    body: new FormControl('')
+  });
+  posts$: Observable<XxxPost[]> = of([]);
 
   constructor(
     private xxxPostFacadeService: XxxPostFacadeService
   ) {
-    this.createForm();
     this.registerObservables();
     this.xxxPostFacadeService.dispatchGetUserPosts();
   }
@@ -34,15 +36,8 @@ export class XxxPostComponent {
     this.xxxPostFacadeService.dispatchUpdatePost(post);
   }
 
-  private createForm(): void {
-    this.postForm = new FormGroup({
-      title: new FormControl(''),
-      body: new FormControl('')
-    })
-  }
-
   private registerObservables(): void {
-    this.isNoSelectedUser$ = this.xxxPostFacadeService.isNoSelectedUser$;
+    this.isSelectedUser$ = this.xxxPostFacadeService.isSelectedUser$;
     this.isPostsLoaded$ = this.xxxPostFacadeService.isPostsLoaded$;
     this.isPostsLoading$ = this.xxxPostFacadeService.isPostsLoading$;
     this.isUserPostLoading$ = this.xxxPostFacadeService.isPostUpdating$;
