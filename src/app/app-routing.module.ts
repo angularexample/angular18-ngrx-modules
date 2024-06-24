@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {XxxPostGuard} from "./xxx-post/xxx-post.guard";
 
 const routes: Routes = [
   {
@@ -9,8 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    loadChildren: () =>  import('./xxx-post/xxx-post.module').then(m => m.XxxPostModule),
-    canActivate: [XxxPostGuard]
+    loadChildren: () =>  import('./xxx-post/xxx-post.module').then(m => m.XxxPostModule)
   }
 ];
 
