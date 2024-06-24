@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {XxxPost} from "./xxx-post.types";
 import {XxxPostFacadeService} from "./xxx-post-facade.service";
@@ -9,7 +9,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   templateUrl: './xxx-post.component.html',
   styleUrls: ['./xxx-post.component.scss']
 })
-export class XxxPostComponent {
+export class XxxPostComponent implements OnInit{
   isSelectedUser$: Observable<boolean> = of(false);
   isPostsLoaded$: Observable<boolean>= of(false);
   isPostsLoading$: Observable<boolean> = of(false);
@@ -25,7 +25,6 @@ export class XxxPostComponent {
     private xxxPostFacadeService: XxxPostFacadeService
   ) {
     this.registerObservables();
-    this.xxxPostFacadeService.dispatchGetUserPosts();
   }
 
   selectPost(post: XxxPost) {
@@ -42,6 +41,10 @@ export class XxxPostComponent {
     this.isPostsLoading$ = this.xxxPostFacadeService.isPostsLoading$;
     this.isUserPostLoading$ = this.xxxPostFacadeService.isPostUpdating$;
     this.posts$ = this.xxxPostFacadeService.posts$;
+  }
+
+  ngOnInit(): void {
+    this.xxxPostFacadeService.dispatchGetUserPosts();
   }
 
 }

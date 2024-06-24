@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import { Router } from '@angular/router';
+import {CanLoad, Router} from '@angular/router';
 import {Observable, take, tap} from 'rxjs';
 import {XxxPostFacadeService} from "./xxx-post-facade.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class XxxPostGuard  {
+export class XxxPostGuard {
   constructor(
     private router: Router,
     private xxxPostFacadeService: XxxPostFacadeService) {
