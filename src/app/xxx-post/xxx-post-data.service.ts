@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {XxxPost, XxxUser} from "./xxx-post.types";
+import {XxxPost} from "./xxx-post.types";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,6 @@ import {XxxPost, XxxUser} from "./xxx-post.types";
 export class XxxPostDataService {
 
   constructor(private http: HttpClient) {
-  }
-
-  getUsers(): Observable<XxxUser[]> {
-    const userUrl = 'https://jsonplaceholder.typicode.com/users';
-    return this.http.get<XxxUser[]>(userUrl);
   }
 
   getUserPosts(userId: number): Observable<XxxPost[]> {

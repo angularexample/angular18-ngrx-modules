@@ -1,7 +1,6 @@
 <main>
   <section>
     <h1>User Posts</h1>
-    <pre>isSelectedUser$: {{(isSelectedUser$ | async |json)}}</pre>
     <ng-template *ngIf="(isSelectedUser$ | async); else xxxNoSelectedUser">
       <div>Select a Post to View/Edit</div>
       <table>

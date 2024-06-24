@@ -2,10 +2,12 @@
   <div>Select a User to View/Edit Posts</div>
   <div *ngIf="isUsersLoading$|async">Loading...</div>
   <table *ngIf="isUsersLoaded$|async"  class="xxx-table">
-    <tr *ngFor="let user of users$ | async" class="xxx-table-row" (click)="rowClick(user)">
+    <tr>
       <th class="xxx-table-cell-header">ID</th>
-      <td class="xxx-table-cell">{{ user.id }}</td>
       <th class="xxx-table-cell-header">Name</th>
+    </tr>
+    <tr *ngFor="let user of users$ | async" class="xxx-table-row" (click)="rowClick(user)">
+      <td class="xxx-table-cell">{{ user.id }}</td>
       <td class="xxx-table-cell">{{ user.name }}</td>
     </tr>
   </table>

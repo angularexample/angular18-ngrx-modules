@@ -9,7 +9,8 @@ import {XxxUser} from "./xxx-user.types";
 @Injectable()
 export class XxxUserEffects {
 
-  getUsers$ = createEffect(() => this.actions$.pipe(
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
     ofType(XxxUserActions.getUsers),
     switchMap(() =>
       this.xxxUserDataService.getUsers().pipe(
