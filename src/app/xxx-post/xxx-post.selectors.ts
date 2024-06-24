@@ -62,5 +62,5 @@ export const selectIsUserState = createSelector(
 
 export const selectIsSelectedUser = createSelector(
   XxxUserSelectors.selectIsSelectedUser,
-  (isSelectedUser) => isSelectedUser !== null && isSelectedUser
+  (isSelectedUser) => isSelectedUser
 );

@@ -10,7 +10,7 @@ export const selectIsUsersLoading = createSelector(
 
 export const selectSelectedUserId = createSelector(
   selectUserState,
-  (state: XxxUserState) => state.selectedUserId
+  (state: XxxUserState | undefined) => state ? state.selectedUserId : undefined
 )
 
 export const selectUsers = createSelector(
@@ -26,5 +26,5 @@ export const selectIsUsersLoaded = createSelector(
 
 export const selectIsSelectedUser = createSelector(
   selectSelectedUserId,
-  (userId: number | undefined) => selectSelectedUserId !== undefined
+  (userId: number | undefined) => (userId !== undefined),
 );

@@ -9,15 +9,14 @@ import * as XxxPostSelectors from './xxx-post.selectors';
   providedIn: 'root'
 })
 export class XxxPostFacadeService {
-  isSelectedUser$: Observable<boolean> = of(false);
-  isUserState$: Observable<boolean> = of(false);
-  isPostsLoaded$: Observable<boolean> = of(false);
-  isPostsLoading$: Observable<boolean> = of(false);
-  isPostUpdating$: Observable<boolean> = of(false);
-  posts$: Observable<XxxPost[]> = of([]);
+  isSelectedUser$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSelectedUser);
+  isUserState$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsUserState);
+  isPostsLoaded$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoaded);
+  isPostsLoading$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoading);
+  isPostUpdating$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostUpdating);
+  posts$: Observable<XxxPost[]> = this.store.select(XxxPostSelectors.selectPosts);
 
   constructor(private store: Store) {
-    this.registerObservables();
   }
 
   dispatchGetUserPosts(): void {
@@ -30,14 +29,5 @@ export class XxxPostFacadeService {
 
   dispatchUpdatePost(post: XxxPost): void {
     this.store.dispatch(XxxPostActions.updatePost({post}))
-  }
-
-  private registerObservables(): void {
-    this.isSelectedUser$ = this.store.select(XxxPostSelectors.selectIsSelectedUser);
-    this.isUserState$ = this.store.select(XxxPostSelectors.selectIsUserState);
-    this.isPostsLoaded$ = this.store.select(XxxPostSelectors.selectIsPostsLoaded);
-    this.isPostsLoading$ = this.store.select(XxxPostSelectors.selectIsPostsLoading);
-    this.isPostUpdating$ = this.store.select(XxxPostSelectors.selectIsPostUpdating);
-    this.posts$ = this.store.select(XxxPostSelectors.selectPosts);
   }
 }

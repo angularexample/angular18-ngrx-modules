@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Component} from '@angular/core';
+import {Observable} from "rxjs";
 import {XxxPost} from "./xxx-post.types";
 import {XxxPostFacadeService} from "./xxx-post-facade.service";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -9,22 +9,22 @@ import {FormControl, FormGroup} from "@angular/forms";
   templateUrl: './xxx-post.component.html',
   styleUrls: ['./xxx-post.component.scss']
 })
-export class XxxPostComponent implements OnInit{
-  isSelectedUser$: Observable<boolean> = of(false);
-  isPostsLoaded$: Observable<boolean>= of(false);
-  isPostsLoading$: Observable<boolean> = of(false);
-  isUserPostLoading$: Observable<boolean> = of(false);
-  newPost: XxxPost | undefined;
+export class XxxPostComponent {
+  isPostsLoaded$: Observable<boolean>= this.xxxPostFacadeService.isPostsLoaded$;
+  isPostsLoading$: Observable<boolean> = this.xxxPostFacadeService.isPostsLoading$;
+  isPostUpdating$: Observable<boolean> = this.xxxPostFacadeService.isPostUpdating$;
+  isSelectedUser$: Observable<boolean> = this.xxxPostFacadeService.isSelectedUser$;
+  // newPost: XxxPost | undefined;
   postForm: FormGroup = new FormGroup({
     title: new FormControl(''),
     body: new FormControl('')
   });
-  posts$: Observable<XxxPost[]> = of([]);
+  posts$: Observable<XxxPost[]> = this.xxxPostFacadeService.posts$;
 
   constructor(
     private xxxPostFacadeService: XxxPostFacadeService
   ) {
-    this.registerObservables();
+    this.xxxPostFacadeService.dispatchGetUserPosts();
   }
 
   selectPost(post: XxxPost) {
@@ -34,17 +34,4 @@ export class XxxPostComponent implements OnInit{
   updatePost(post: XxxPost) {
     this.xxxPostFacadeService.dispatchUpdatePost(post);
   }
-
-  private registerObservables(): void {
-    this.isSelectedUser$ = this.xxxPostFacadeService.isSelectedUser$;
-    this.isPostsLoaded$ = this.xxxPostFacadeService.isPostsLoaded$;
-    this.isPostsLoading$ = this.xxxPostFacadeService.isPostsLoading$;
-    this.isUserPostLoading$ = this.xxxPostFacadeService.isPostUpdating$;
-    this.posts$ = this.xxxPostFacadeService.posts$;
-  }
-
-  ngOnInit(): void {
-    this.xxxPostFacadeService.dispatchGetUserPosts();
-  }
-
 }
