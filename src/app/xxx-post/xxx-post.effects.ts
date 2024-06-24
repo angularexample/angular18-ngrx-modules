@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Actions, concatLatestFrom, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from "@ngrx/store";
 import {of, map, switchMap, tap, catchError} from 'rxjs';
 import * as XxxPostActions from './xxx-post.actions';
