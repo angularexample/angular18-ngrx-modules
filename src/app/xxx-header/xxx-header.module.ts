@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {XxxHeaderComponent} from "./xxx-header.component";
-import {RouterLinkActive, RouterLinkWithHref} from "@angular/router";
+import {RouterLinkActive, RouterLink} from "@angular/router";
 
 
 @NgModule({
     declarations: [XxxHeaderComponent],
   imports: [
-    RouterLinkWithHref,
+    RouterLink,
     RouterLinkActive
   ],
     exports: [
