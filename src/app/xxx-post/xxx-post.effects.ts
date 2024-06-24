@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from "@ngrx/store";
+import { concatLatestFrom } from '@ngrx/operators';
 import {of, map, switchMap, tap, catchError} from 'rxjs';
 import * as XxxPostActions from './xxx-post.actions';
 import * as XxxPostSelectors from './xxx-post.selectors';
