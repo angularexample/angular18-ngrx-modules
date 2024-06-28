@@ -4,7 +4,6 @@ export const xxxGetUsers = (state: XxxUserState) => {
   return {
     ...state,
     isUsersLoading: true,
-    selectedUserId: undefined,
     users: []
   }
 }

@@ -1,0 +1,30 @@
+<pre>isSelectedUser$: {{ isSelectedPost$ | async | json }}</pre>
+<pre>selectedPost$: {{selectedPost$ | async | json}}</pre>
+<main>
+  <section>
+    <h1>Edit Post</h1>
+    <div *ngIf="(isSelectedPost$ | async); else xxxNoSelectedPost">
+      <section>
+        <h2>Edit Post</h2>
+        <form [formGroup]="postForm">
+          <div class="xxx-form-row">
+            <div class="xxx-form-caption">User Id</div>
+            <div class="xxx-form-text-value">{{ (selectedPost$ | async)?.userId }}</div>
+          </div>
+          <div class="xxx-form-row">
+            <div class="xxx-form-caption">Post Id</div>
+            <div class="xxx-form-text-value">{{ (selectedPost$ | async)?.id }}</div>
+          </div>
+          <input type="text" formControlName="title" placeholder="Title"/>
+          <input type="text" formControlName="body" placeholder="Body"/>
+          <input type="button" (click)="updatePost()" [disabled]="iSaveButtonDisabled$ | async" ]/>
+        </form>
+      </section>
+    </div>
+  </section>
+</main>
+
+<ng-template #xxxNoSelectedPost>
+  <div>There is no selected post.</div>
+  <div>Go to Posts page to select a post.</div>
+</ng-template>

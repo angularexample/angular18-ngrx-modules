@@ -1,11 +1,10 @@
-import {XxxPost, XxxPostState} from "./xxx-post.types";
+import {XxxPost, XxxPostFormData, XxxPostState} from "./xxx-post.types";
 
 export const xxxGetUserPosts = (state: XxxPostState) => {
   return {
     ...state,
     isPostsLoading: true,
     posts: [],
-    selectedPostId: undefined
   }
 }
 
@@ -25,15 +24,22 @@ export const xxxGetUserPostsSuccess = (state: XxxPostState, action: { posts: Xxx
   }
 }
 
-export const xxxSelectPost = (state: XxxPostState, action: { selectedPostId: number }) => {
-  let newPost: XxxPost | undefined = state.posts.find((item: XxxPost): boolean => item.id === action.selectedPostId);
-  if (newPost) {
-    newPost = <XxxPost>JSON.parse(JSON.stringify(newPost));
+export const xxxSelectPost = (state: XxxPostState, action: { postId: number }) => {
+  let newState: XxxPostState = {
+    ...state
+  };
+  // make sure the selected post exists
+  if (state.posts.some((item: XxxPost): boolean => item.id === action.postId)) {
+    newState.selectedPostId = action.postId
   }
+  return newState;
+}
+
+export const xxxSetPostForm = (state: XxxPostState, action: {postForm: XxxPostFormData}) => {
+  const newPostForm: XxxPostFormData = JSON.parse(JSON.stringify(action.postForm));
   return {
     ...state,
-    newPost,
-    selectedPostId: action.selectedPostId
+    postForm: newPostForm
   }
 }
 

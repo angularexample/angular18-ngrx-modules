@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {XxxPost, xxxPostFeatureName} from "./xxx-post.types";
+import {XxxPost, xxxPostFeatureName, XxxPostFormData} from "./xxx-post.types";
 
 export const getUserPosts = createAction(
   `${xxxPostFeatureName}.getUserPosts`
@@ -19,16 +19,20 @@ export const selectPost = createAction(
   props<{ postId: number }>()
 );
 
-export const updatePost = createAction(
-  `${xxxPostFeatureName}.updatePost`,
-  props<{ post: XxxPost }>()
+export const setPostForm = createAction(
+  `${xxxPostFeatureName}.setPostForm`,
+  props<{ postForm: XxxPostFormData }>()
 );
 
-export const updatePostError = createAction(
+export const updatePost = createAction(
   `${xxxPostFeatureName}.updatePost`
 );
 
+export const updatePostError = createAction(
+  `${xxxPostFeatureName}.updatePostError`
+);
+
 export const updatePostSuccess = createAction(
-  `${xxxPostFeatureName}.updatePost`,
+  `${xxxPostFeatureName}.updatePostSuccess`,
   props<{ post: XxxPost }>()
 );

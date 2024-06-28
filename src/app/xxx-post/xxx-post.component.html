@@ -1,33 +1,25 @@
-<pre>isSelectedUser$: {{isSelectedUser$ | async | json}}</pre>
+<!--<pre>isSelectedUser$: {{isSelectedUser$ | async | json}}</pre>-->
 <!--<pre>posts$: {{posts$ | async | json}}</pre>-->
 <main>
   <section>
-    <h1>User Posts</h1>
+    <h1>Posts</h1>
     <div *ngIf="(isSelectedUser$ | async); else xxxNoSelectedUser">
       <div>Select a Post to View/Edit</div>
-      <table>
+      <table class="xxx-table">
         <tr>
-          <th>Id</th>
-          <th>Title</th>
-          <th>Body</th>
+          <th class="xxx-table-cell-header">Id</th>
+          <th class="xxx-table-cell-header">Title</th>
+          <th class="xxx-table-cell-header">Body</th>
         </tr>
-        <tr *ngFor="let post of posts$ | async" class="xxx-table-row" (click)="selectPost(post)">
-          <td>{{post.id}}</td>
-          <td>{{post.title}}</td>
-          <td>{{post.body}}</td>
+        <tr *ngFor="let post of posts$ | async"
+            class="xxx-table-row"
+            [class.active]="(selectedPostId$|async)===post.id"
+            (click)="selectPost(post)">
+          <td class="xxx-table-cell">{{post.id}}</td>
+          <td class="xxx-table-cell">{{post.title}}</td>
+          <td class="xxx-table-cell">{{post.body}}</td>
         </tr>
       </table>
-<!--      <section>-->
-<!--        <h2>Edit Post</h2>-->
-<!--        <form [formGroup]="postForm">-->
-<!--          <div class="xxx-form-row">-->
-<!--            <div class="xxx-form-caption">id</div>-->
-<!--            &lt;!&ndash;        <div class="xxx-form-text-value">{{post.id}}</div>&ndash;&gt;-->
-<!--          </div>-->
-<!--          <input type="text" formControlName="title" placeholder="Title">-->
-<!--          <input type="text" formControlName="body" placeholder="Body">-->
-<!--        </form>-->
-<!--      </section>-->
     </div>
   </section>
 </main>

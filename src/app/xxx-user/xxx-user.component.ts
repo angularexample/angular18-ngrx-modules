@@ -2,26 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {XxxUser} from "./xxx-user.types";
 import {XxxUserFacadeService} from "./xxx-user-facade.service";
+import {selectPost} from "../xxx-post/xxx-post.actions";
 
 @Component({
   selector: 'app-xxx-user',
   templateUrl: './xxx-user.component.html',
-  styleUrls: ['./xxx-user.component.scss']
+  styleUrls: ['./xxx-user.component.scss', '../styles/common-styles.scss']
 })
 export class XxxUserComponent {
-  isUsersLoaded$: Observable<boolean> | undefined;
-  isUsersLoading$: Observable<boolean> | undefined;
-  users$: Observable<XxxUser[]> | undefined;
+  isUsersLoaded$: Observable<boolean>=this.xxxUserFacadeService.isUsersLoaded$;
+  isUsersLoading$: Observable<boolean>=this.xxxUserFacadeService.isUsersLoading$;
+  selectedUserId$: Observable<number | undefined>=this.xxxUserFacadeService.selectedUserId$;
+  users$: Observable<XxxUser[]>=this.xxxUserFacadeService.users$;
 
   constructor(private xxxUserFacadeService: XxxUserFacadeService) {
-    this.registerObservables();
     this.xxxUserFacadeService.dispatchGetUsers();
-  }
-
-  private registerObservables():void{
-    this.isUsersLoaded$=this.xxxUserFacadeService.isUsersLoaded$;
-    this.isUsersLoading$=this.xxxUserFacadeService.isUsersLoading$;
-    this.users$=this.xxxUserFacadeService.users$;
   }
 
   rowClick(user: XxxUser) {

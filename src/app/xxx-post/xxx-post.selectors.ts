@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {XxxPost, xxxPostFeatureName, XxxPostState} from "./xxx-post.types";
+import {XxxPost, xxxPostFeatureName, XxxPostFormData, XxxPostState} from "./xxx-post.types";
 import * as XxxUserSelectors from '../xxx-user/xxx-user.selectors';
 import {XxxUserState} from "../xxx-user/xxx-user.types";
 
@@ -15,9 +15,9 @@ export const selectIsPostUpdating = createSelector(
   (state: XxxPostState) => state.isPostUpdating
 );
 
-export const selectNewPost = createSelector(
+export const selectPostForm = createSelector(
   selectPostState,
-  (state: XxxPostState) => state.newPost
+  (state: XxxPostState) => state.postForm
 )
 
 export const selectPosts = createSelector(
@@ -47,17 +47,39 @@ export const selectSelectedPost = createSelector(
   (posts: XxxPost[], postId: number | undefined) => postId ? posts[postId] : undefined
 );
 
-export const selectIsSaveButtonDisabled = createSelector(
-  selectIsPostsLoading,
+export const selectEditedPost = createSelector(
   selectSelectedPost,
-  selectNewPost,
-  (isPostsLoading: boolean, selectedPost: XxxPost | undefined, newPost: XxxPost | undefined) =>
-    isPostsLoading || selectedPost === undefined || newPost === undefined || (JSON.stringify(selectedPost) === JSON.stringify(newPost))
+  selectPostForm,
+  (selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
+    let editedPost: XxxPost | undefined;
+    if(selectedPost && postForm) {
+            editedPost = {
+              ...selectedPost,
+              //...postForm
+            };
+    }
+    return editedPost
+  }
+);
+
+export const selectIsSaveButtonDisabled = createSelector(
+  selectIsPostsLoaded,
+  selectSelectedPost,
+  selectPostForm,
+  (isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) =>{
+    const oldPost: XxxPostFormData = <XxxPostFormData>selectedPost;
+    return (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(oldPost) === JSON.stringify(postForm))
+  }
 );
 
 export const selectIsUserState = createSelector(
   XxxUserSelectors.selectUserState,
   (userState:  XxxUserState | undefined) => !!userState
+);
+
+export const selectIsSelectedPost = createSelector(
+  selectPostState,
+  (state:XxxPostState) => state.selectedPostId !== undefined
 );
 
 export const selectIsSelectedUser = createSelector(

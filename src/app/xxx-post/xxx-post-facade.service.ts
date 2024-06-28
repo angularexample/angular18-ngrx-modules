@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {XxxPost} from "./xxx-post.types";
+import {XxxPost, XxxPostFormData} from "./xxx-post.types";
 import {Store} from "@ngrx/store";
 import * as XxxPostActions from './xxx-post.actions';
 import * as XxxPostSelectors from './xxx-post.selectors';
@@ -9,12 +9,15 @@ import * as XxxPostSelectors from './xxx-post.selectors';
   providedIn: 'root'
 })
 export class XxxPostFacadeService {
-  isSelectedUser$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSelectedUser);
-  isUserState$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsUserState);
   isPostsLoaded$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoaded);
   isPostsLoading$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoading);
   isPostUpdating$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostUpdating);
+  isSaveButtonDisabled$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSaveButtonDisabled);
+  isSelectedPost$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSelectedPost);
+  isSelectedUser$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSelectedUser);
   posts$: Observable<XxxPost[]> = this.store.select(XxxPostSelectors.selectPosts);
+  selectedPost$: Observable<XxxPost | undefined> = this.store.select(XxxPostSelectors.selectSelectedPost);
+  selectedPostId$: Observable<number | undefined> = this.store.select(XxxPostSelectors.selectSelectedPostId);
 
   constructor(private store: Store) {
   }
@@ -27,7 +30,11 @@ export class XxxPostFacadeService {
     this.store.dispatch(XxxPostActions.selectPost({postId}))
   }
 
-  dispatchUpdatePost(post: XxxPost): void {
-    this.store.dispatch(XxxPostActions.updatePost({post}))
+  dispatchUpdatePost(): void {
+    this.store.dispatch(XxxPostActions.updatePost())
+  }
+
+  dispatchSetPostForm(postForm: XxxPostFormData): void {
+    this.store.dispatch(XxxPostActions.setPostForm({postForm}))
   }
 }

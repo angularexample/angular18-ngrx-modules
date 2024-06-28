@@ -1,5 +1,3 @@
-import {FormControl} from "@angular/forms";
-
 export interface XxxPost {
   userId: number;
   id: number;
@@ -9,10 +7,15 @@ export interface XxxPost {
 
 export const xxxPostFeatureName = 'xxxPost';
 
-export interface XxxPostForm {
-  title: FormControl<string>;
-  body: FormControl<string>;
+export interface XxxPostFormData {
+  title: string;
+  body: string;
 }
+
+export const xxxPostFormDataInitial: XxxPostFormData = {
+  body: '',
+  title: ''
+};
 
 export const xxxPostInitialState: XxxPostState = {
   isPostsLoading: false,
@@ -23,7 +26,7 @@ export const xxxPostInitialState: XxxPostState = {
 export interface XxxPostState {
   isPostsLoading: boolean;
   isPostUpdating: boolean;
-  newPost?: XxxPost;
+  postForm?: XxxPostFormData;
   posts: XxxPost[];
   selectedPostId?: number;
 }

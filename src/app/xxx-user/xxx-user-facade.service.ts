@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {XxxUser} from "./xxx-user.types";
 import {Store} from "@ngrx/store";
@@ -9,25 +9,19 @@ import * as XxxUserSelectors from './xxx-user.selectors';
   providedIn: 'root'
 })
 export class XxxUserFacadeService {
-  isUsersLoaded$: Observable<boolean> | undefined;
-  isUsersLoading$: Observable<boolean> | undefined;
-  users$: Observable<XxxUser[]> | undefined;
+  isUsersLoaded$: Observable<boolean> = this.store.select(XxxUserSelectors.selectIsUsersLoaded);
+  isUsersLoading$: Observable<boolean> = this.store.select(XxxUserSelectors.selectIsUsersLoading);
+  selectedUserId$: Observable<number | undefined> = this.store.select(XxxUserSelectors.selectSelectedUserId);
+  users$: Observable<XxxUser[]> = this.store.select(XxxUserSelectors.selectUsers);
 
   constructor(private store: Store) {
-    this.registerObservables();
   }
 
-  dispatchGetUsers():void{
+  dispatchGetUsers(): void {
     this.store.dispatch(XxxUserActions.getUsers())
   }
 
-  dispatchSelectUser(userId: number):void{
+  dispatchSelectUser(userId: number): void {
     this.store.dispatch(XxxUserActions.selectUser({userId}))
-  }
-
-  private registerObservables():void{
-    this.isUsersLoaded$ = this.store.select(XxxUserSelectors.selectIsUsersLoaded);
-    this.isUsersLoading$ = this.store.select(XxxUserSelectors.selectIsUsersLoading);
-    this.users$=this.store.select(XxxUserSelectors.selectUsers);
   }
 }

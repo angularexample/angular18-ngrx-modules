@@ -1,14 +1,18 @@
+<pre>selectedUserId$:{{ selectedUserId$|async }}</pre>
 <main>
-  <div>Select a User to View/Edit Posts</div>
   <div *ngIf="isUsersLoading$|async">Loading...</div>
-  <table *ngIf="isUsersLoaded$|async"  class="xxx-table">
-    <tr>
-      <th class="xxx-table-cell-header">ID</th>
-      <th class="xxx-table-cell-header">Name</th>
-    </tr>
-    <tr *ngFor="let user of users$ | async" class="xxx-table-row" (click)="rowClick(user)">
-      <td class="xxx-table-cell">{{ user.id }}</td>
-      <td class="xxx-table-cell">{{ user.name }}</td>
-    </tr>
-  </table>
+  <section *ngIf="isUsersLoaded$|async">
+    <h2 class="xxx-subheading">Select a User to View/Edit Posts</h2>
+    <table class="xxx-table">
+      <tr>
+        <th class="xxx-table-cell-header">ID</th>
+        <th class="xxx-table-cell-header">Name</th>
+      </tr>
+      <tr *ngFor="let user of users$ | async" class="xxx-table-row"
+          [class.active]="(selectedUserId$|async)===user.id" (click)="rowClick(user)">
+        <td class="xxx-table-cell">{{ user.id }}</td>
+        <td class="xxx-table-cell">{{ user.name }}</td>
+      </tr>
+    </table>
+  </section>
 </main>
