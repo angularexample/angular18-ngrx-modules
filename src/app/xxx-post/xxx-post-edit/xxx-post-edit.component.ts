@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
-import {XxxPost, xxxPostFormDataInitial} from "../xxx-post.types";
+import {Observable, take} from "rxjs";
+import {XxxPost, XxxPostFormData, xxxPostFormDataInitial} from "../xxx-post.types";
 import {XxxPostFacadeService} from "../xxx-post-facade.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -22,11 +22,23 @@ export class XxxPostEditComponent {
   constructor(
     private xxxPostFacadeService: XxxPostFacadeService
   ) {
+    this.loadFormData();
     this.subscribeToFormChanges();
   }
 
   updatePost() {
     this.xxxPostFacadeService.dispatchUpdatePost();
+  }
+
+  private loadFormData(): void {
+    this.selectedPost$.pipe(
+      take(1)
+    ).subscribe((post: XxxPost | undefined): void => {
+      if (post) {
+        const formData: XxxPostFormData = <XxxPostFormData>post;
+        this.postForm.setValue(formData);
+      }
+    })
   }
 
   private subscribeToFormChanges(): void {

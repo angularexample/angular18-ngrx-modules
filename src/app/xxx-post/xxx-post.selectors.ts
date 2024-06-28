@@ -44,7 +44,13 @@ export const selectIsPostsLoaded = createSelector(
 export const selectSelectedPost = createSelector(
   selectPosts,
   selectSelectedPostId,
-  (posts: XxxPost[], postId: number | undefined) => postId ? posts[postId] : undefined
+  (posts: XxxPost[], postId: number | undefined) => {
+    let post: XxxPost | undefined = undefined;
+    if (postId !== undefined && posts.length > 0) {
+      post = posts.find(item => item.id === postId);
+    }
+    return post;
+  }
 );
 
 export const selectEditedPost = createSelector(
@@ -52,11 +58,11 @@ export const selectEditedPost = createSelector(
   selectPostForm,
   (selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
     let editedPost: XxxPost | undefined;
-    if(selectedPost && postForm) {
-            editedPost = {
-              ...selectedPost,
-              //...postForm
-            };
+    if (selectedPost && postForm) {
+      editedPost = {
+        ...selectedPost,
+        //...postForm
+      };
     }
     return editedPost
   }
@@ -66,7 +72,7 @@ export const selectIsSaveButtonDisabled = createSelector(
   selectIsPostsLoaded,
   selectSelectedPost,
   selectPostForm,
-  (isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) =>{
+  (isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
     const oldPost: XxxPostFormData = <XxxPostFormData>selectedPost;
     return (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(oldPost) === JSON.stringify(postForm))
   }
@@ -74,12 +80,12 @@ export const selectIsSaveButtonDisabled = createSelector(
 
 export const selectIsUserState = createSelector(
   XxxUserSelectors.selectUserState,
-  (userState:  XxxUserState | undefined) => !!userState
+  (userState: XxxUserState | undefined) => !!userState
 );
 
 export const selectIsSelectedPost = createSelector(
   selectPostState,
-  (state:XxxPostState) => state.selectedPostId !== undefined
+  (state: XxxPostState) => state.selectedPostId !== undefined
 );
 
 export const selectIsSelectedUser = createSelector(
