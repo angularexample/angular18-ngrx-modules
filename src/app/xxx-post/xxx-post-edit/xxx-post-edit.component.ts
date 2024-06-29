@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Observable, take} from "rxjs";
+import {debounceTime, distinctUntilChanged, Observable, take} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {XxxPost, XxxPostFormData, xxxPostFormDataInitial} from "../xxx-post.types";
 import {XxxPostFacadeService} from "../xxx-post-facade.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'xxx-post-edit',
@@ -26,11 +26,7 @@ export class XxxPostEditComponent {
     this.subscribeToFormChanges();
   }
 
-  onSubmit(formData: XxxPostFormData) {
-    console.log('~onSubmit',formData)
-  }
-
-  updatePost() {
+  onSubmit() {
     this.xxxPostFacadeService.dispatchUpdatePost();
   }
 
@@ -49,9 +45,11 @@ export class XxxPostEditComponent {
   }
 
   private subscribeToFormChanges(): void {
-    this.postForm.valueChanges.subscribe(value => {
-      console.log('~onFormChanges', value)
-      //TODO dispatch
+    this.postForm.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      this.xxxPostFacadeService.dispatchSetPostForm(value);
     });
   }
 }

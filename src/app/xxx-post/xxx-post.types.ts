@@ -5,6 +5,10 @@ export interface XxxPost {
   body: string;
 }
 
+export interface XxxPostResponse {
+  id: number;
+}
+
 export const xxxPostFeatureName = 'xxxPost';
 
 export interface XxxPostFormData {

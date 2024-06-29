@@ -69,12 +69,13 @@ export const selectEditedPost = createSelector(
 );
 
 export const selectIsSaveButtonDisabled = createSelector(
+  selectIsPostUpdating,
   selectIsPostsLoaded,
   selectSelectedPost,
   selectPostForm,
-  (isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
+  (isPostsUpdating: boolean, isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
     const oldPost: XxxPostFormData = <XxxPostFormData>selectedPost;
-    return (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(oldPost) === JSON.stringify(postForm))
+    return isPostsUpdating || (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(oldPost) === JSON.stringify(postForm))
   }
 );
 

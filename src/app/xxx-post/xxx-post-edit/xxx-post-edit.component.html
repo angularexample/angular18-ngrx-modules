@@ -6,7 +6,7 @@
     <div *ngIf="(isSelectedPost$ | async); else xxxNoSelectedPost">
       <section>
         <h2>Edit Post</h2>
-        <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
           <div class="xxx-form-row">
             <label class="xxx-form-caption" for="xxx-post-user-id">User Id</label>
             <div class="xxx-form-text-value" id="xxx-post-user-id">{{ (selectedPost$ | async)?.userId }}</div>

@@ -7,7 +7,7 @@ import {of, map, switchMap, tap, catchError} from 'rxjs';
 import * as XxxPostActions from './xxx-post.actions';
 import * as XxxPostSelectors from './xxx-post.selectors';
 import {XxxPostDataService} from "./xxx-post-data.service";
-import {XxxPost} from "./xxx-post.types";
+import {XxxPost, XxxPostResponse} from "./xxx-post.types";
 
 
 @Injectable()
@@ -46,7 +46,7 @@ export class XxxPostEffects {
       switchMap((post: XxxPost | undefined) => {
         if (post !== undefined) {
           return this.xxxPostDataService.updatePost(post).pipe(
-            map((post: XxxPost) => XxxPostActions.updatePostSuccess({post})),
+            map((postResponse: XxxPostResponse) => XxxPostActions.updatePostSuccess({postResponse})),
             catchError(() => of(XxxPostActions.updatePostError()))
           )
         } else {
@@ -54,6 +54,14 @@ export class XxxPostEffects {
         }
       })
     ));
+
+  updatePostSuccess$ = createEffect(() => this.actions$.pipe(
+      ofType(XxxPostActions.updatePostSuccess),
+      tap(() => {
+        this.router.navigateByUrl('/post')
+      })
+    ), {dispatch: false}
+  );
 
   constructor(
     private actions$: Actions,
