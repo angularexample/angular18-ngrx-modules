@@ -26,6 +26,10 @@ export class XxxPostEditComponent {
     this.subscribeToFormChanges();
   }
 
+  onSubmit(formData: XxxPostFormData) {
+    console.log('~onSubmit',formData)
+  }
+
   updatePost() {
     this.xxxPostFacadeService.dispatchUpdatePost();
   }
@@ -35,7 +39,10 @@ export class XxxPostEditComponent {
       take(1)
     ).subscribe((post: XxxPost | undefined): void => {
       if (post) {
-        const formData: XxxPostFormData = <XxxPostFormData>post;
+        const formData: XxxPostFormData = {
+          body: post.body,
+          title: post.title,
+        };
         this.postForm.setValue(formData);
       }
     })
@@ -43,7 +50,7 @@ export class XxxPostEditComponent {
 
   private subscribeToFormChanges(): void {
     this.postForm.valueChanges.subscribe(value => {
-      console.log('onFormChanges', value)
+      console.log('~onFormChanges', value)
       //TODO dispatch
     });
   }
