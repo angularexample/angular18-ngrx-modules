@@ -1,11 +1,10 @@
 <main>
-  <section>
-    <h1>Home</h1>
-    <div class="xxx-body-content">
-      This is demo app to show lazy loading of NgRx feature states, using Angular 18, but without standalone components.
-    </div>
-    <div class="xxx-body-content">
-      Go to the Users page to begin the demo.
-    </div>
-  </section>
+  <ng-container *ngIf="content$ | async; else xxxNoContent; let content">
+    <section>
+      <h1>{{ content.pageTitle }}</h1>
+      <div class="xxx-body-content">{{ content.bodyText }}</div>
+    </section>
+  </ng-container>
 </main>
+
+<ng-template #xxxNoContent>Loading...</ng-template>

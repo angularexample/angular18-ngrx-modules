@@ -12,7 +12,7 @@ export class XxxUserDataService {
   }
 
   getUsers(): Observable<XxxUser[]> {
-    const userUrl = 'https://jsonplaceholder.typicode.com/users';
-    return this.http.get<XxxUser[]>(userUrl);
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    return this.http.get<XxxUser[]>(url);
   }
 }
