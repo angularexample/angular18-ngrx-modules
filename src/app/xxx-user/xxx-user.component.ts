@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {XxxUser} from "./xxx-user.types";
 import {XxxUserFacadeService} from "./xxx-user-facade.service";
@@ -6,7 +6,8 @@ import {XxxUserFacadeService} from "./xxx-user-facade.service";
 @Component({
   selector: 'app-xxx-user',
   templateUrl: './xxx-user.component.html',
-  styleUrl: './xxx-user.component.scss'
+  styleUrl: './xxx-user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxUserComponent {
   isUsersLoaded$: Observable<boolean> = this.xxxUserFacadeService.isUsersLoaded$;

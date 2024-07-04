@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {debounceTime, distinctUntilChanged, Observable, take} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {XxxPost, XxxPostFormData, xxxPostFormDataInitial} from "../xxx-post.types";
@@ -7,7 +7,8 @@ import {XxxPostFacadeService} from "../xxx-post-facade.service";
 @Component({
   selector: 'xxx-post-edit',
   templateUrl: './xxx-post-edit.component.html',
-  styleUrls: ['./xxx-post-edit.component.scss', '../../styles/common-styles.scss']
+  styleUrl: './xxx-post-edit.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxPostEditComponent {
   isPostUpdating$: Observable<boolean> = this.xxxPostFacadeService.isPostUpdating$;

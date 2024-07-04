@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {XxxPost} from "./xxx-post.types";
 import {XxxPostFacadeService} from "./xxx-post-facade.service";
@@ -6,7 +6,8 @@ import {XxxPostFacadeService} from "./xxx-post-facade.service";
 @Component({
   selector: 'xxx-post',
   templateUrl: './xxx-post.component.html',
-  styleUrls: ['./xxx-post.component.scss', '../styles/common-styles.scss']
+  styleUrl: './xxx-post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxPostComponent {
   isPostsLoaded$: Observable<boolean> = this.xxxPostFacadeService.isPostsLoaded$;
