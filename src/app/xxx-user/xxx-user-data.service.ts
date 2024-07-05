@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {XxxUser} from "./xxx-user.types";
+import {XxxUserApiResponse} from "./xxx-user.types";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class XxxUserDataService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers(): Observable<XxxUser[]> {
-    const url = 'https://jsonplaceholder.typicode.com/users';
-    return this.http.get<XxxUser[]>(url);
+  getUsers(): Observable<XxxUserApiResponse> {
+    const url = 'https://dummyjson.com/users/?delay=3000'
+    return this.http.get<XxxUserApiResponse>(url);
   }
 }

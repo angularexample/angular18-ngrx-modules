@@ -1,4 +1,4 @@
-import {XxxUser, XxxUserState} from "./xxx-user.types";
+import {XxxUser, XxxUserApiResponse, XxxUserState} from "./xxx-user.types";
 
 export const xxxGetUsers = (state: XxxUserState) => {
   return {
@@ -15,8 +15,8 @@ export const xxxGetUsersError = (state: XxxUserState) => {
   }
 }
 
-export const xxxGetUsersSuccess = (state: XxxUserState, action: { users: XxxUser[] }) => {
-  const users: XxxUser[] = <XxxUser[]>JSON.parse(JSON.stringify(action.users));
+export const xxxGetUsersSuccess = (state: XxxUserState, action: { payload: XxxUserApiResponse }) => {
+  const users: XxxUser[] = <XxxUser[]>JSON.parse(JSON.stringify(action.payload.users));
   return {
     ...state,
     isUsersLoading: false,

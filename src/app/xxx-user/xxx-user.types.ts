@@ -1,6 +1,14 @@
 export interface XxxUser {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface XxxUserApiResponse {
+  limit: number;
+  skip: number;
+  total: number;
+  users: XxxUser[];
 }
 
 export const xxxUserFeatureName='xxxUser';

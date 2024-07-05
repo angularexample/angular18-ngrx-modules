@@ -4,7 +4,7 @@ import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {Router} from "@angular/router";
 import {XxxUserDataService} from "./xxx-user-data.service";
 import * as XxxUserActions from './xxx-user.actions';
-import {XxxUser} from "./xxx-user.types";
+import {XxxUserApiResponse} from "./xxx-user.types";
 
 @Injectable()
 export class XxxUserEffects {
@@ -14,7 +14,7 @@ export class XxxUserEffects {
     ofType(XxxUserActions.getUsers),
     switchMap(() =>
       this.xxxUserDataService.getUsers().pipe(
-        map((users: XxxUser[]) => XxxUserActions.getUsersSuccess({users})),
+        map((response: XxxUserApiResponse) => XxxUserActions.getUsersSuccess({payload: response})),
         catchError(() => of(XxxUserActions.getUsersError()))
       )
     )

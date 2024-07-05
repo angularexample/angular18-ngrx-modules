@@ -10,6 +10,7 @@ import {XxxUserFacadeService} from "./xxx-user-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxUserComponent {
+  isUsersEmpty$: Observable<boolean> = this.xxxUserFacadeService.isUsersEmpty$;
   isUsersLoaded$: Observable<boolean> = this.xxxUserFacadeService.isUsersLoaded$;
   isUsersLoading$: Observable<boolean> = this.xxxUserFacadeService.isUsersLoading$;
   selectedUserId$: Observable<number | undefined> = this.xxxUserFacadeService.selectedUserId$;

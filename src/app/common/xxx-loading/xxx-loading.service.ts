@@ -9,11 +9,13 @@ export class XxxLoadingService {
     new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
-  loadingOff(): void {
-    this.loadingSubject.next(false);
+  loadingOn() {
+    console.log('~XxxLoadingService.loadingOn()')
+    this.loadingSubject.next(true);
   }
 
-  loadingOn(): void {
-    this.loadingSubject.next(true);
+  loadingOff() {
+    console.log('~XxxLoadingService.loadingOff()')
+    this.loadingSubject.next(false);
   }
 }

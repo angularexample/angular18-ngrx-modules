@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {XxxUser, xxxUserFeatureName} from "./xxx-user.types";
+import {XxxUser, XxxUserApiResponse, xxxUserFeatureName} from "./xxx-user.types";
 
 export const getUsers = createAction(
   `${xxxUserFeatureName}.getUsers`
@@ -11,7 +11,7 @@ export const getUsersError = createAction(
 
 export const getUsersSuccess = createAction(
   `${xxxUserFeatureName}.getUsersSuccess`,
-  props<{ users: XxxUser[] }>()
+  props<{ payload: XxxUserApiResponse }>()
 );
 
 export const selectUser = createAction(
