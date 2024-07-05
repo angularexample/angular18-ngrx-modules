@@ -17,7 +17,7 @@ export class XxxUserComponent {
   users$: Observable<XxxUser[]> = this.xxxUserFacadeService.users$;
 
   constructor(private xxxUserFacadeService: XxxUserFacadeService) {
-    this.xxxUserFacadeService.dispatchGetUsers();
+    this.xxxUserFacadeService.dispatchShowUsers();
   }
 
   rowClick(user: XxxUser) {

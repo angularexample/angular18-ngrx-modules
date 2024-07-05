@@ -19,9 +19,8 @@ export const selectUsers = createSelector(
 )
 
 export const selectIsUsersLoaded = createSelector(
-  selectIsUsersLoading,
   selectUsers,
-  (isLoading: boolean, users: XxxUser[]) => !isLoading && users && users.length > 0
+  (users: XxxUser[]) => users.length > 0
 );
 
 export const selectIsSelectedUser = createSelector(
@@ -32,5 +31,5 @@ export const selectIsSelectedUser = createSelector(
 export const selectIsUsersEmpty = createSelector(
   selectIsUsersLoading,
   selectUsers,
-  (isLoading: boolean, users: XxxUser[]) => !isLoading && users && users.length === 0
+  (isLoading: boolean, users: XxxUser[]) => !isLoading && users.length === 0
 );

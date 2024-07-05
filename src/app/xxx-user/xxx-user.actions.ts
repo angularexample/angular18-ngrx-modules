@@ -14,6 +14,10 @@ export const getUsersSuccess = createAction(
   props<{ payload: XxxUserApiResponse }>()
 );
 
+export const showUsers = createAction(
+  `${xxxUserFeatureName}.showUsers`
+);
+
 export const selectUser = createAction(
   `${xxxUserFeatureName}.selectUser`,
   props<{ userId: number }>()

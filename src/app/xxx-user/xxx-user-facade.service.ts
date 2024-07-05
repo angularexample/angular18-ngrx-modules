@@ -18,8 +18,8 @@ export class XxxUserFacadeService {
   constructor(private store: Store) {
   }
 
-  dispatchGetUsers(): void {
-    this.store.dispatch(XxxUserActions.getUsers())
+  dispatchShowUsers(): void {
+    this.store.dispatch(XxxUserActions.showUsers())
   }
 
   dispatchSelectUser(userId: number): void {
