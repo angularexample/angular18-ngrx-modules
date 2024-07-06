@@ -19,10 +19,10 @@ export class XxxPostComponent {
   constructor(
     private postFacade: XxxPostFacadeService
   ) {
-    this.postFacade.showUserPosts();
+    this.postFacade.dispatchGetUserPosts();
   }
 
   selectPost(post: XxxPost) {
-    this.postFacade.selectPost(post.id);
+    this.postFacade.dispatchSelectPost(post.id);
   }
 }

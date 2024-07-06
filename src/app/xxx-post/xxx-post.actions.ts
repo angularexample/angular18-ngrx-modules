@@ -19,10 +19,6 @@ export const selectPost = createAction(
   props<{ postId: number }>()
 );
 
-export const showUserPosts = createAction(
-  `${xxxPostFeatureName}.showUserPosts`
-);
-
 export const setPostForm = createAction(
   `${xxxPostFeatureName}.setPostForm`,
   props<{ postForm: XxxPostFormData }>()

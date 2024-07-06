@@ -58,7 +58,7 @@ export class XxxUserEffects {
       ofType(XxxUserActions.showUsers),
       concatLatestFrom(() => this.store.select(XxxUserSelectors.selectIsUsersLoaded)),
       map(([_arg1, arg2]) => arg2),
-      filter((isLoaded: boolean) => !isLoaded),
+      filter((isUsersLoaded: boolean) => !isUsersLoaded),
       map(() => XxxUserActions.getUsers())
     ));
 

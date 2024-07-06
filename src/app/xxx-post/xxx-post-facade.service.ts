@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
+import {Observable, of} from "rxjs";
 import {XxxPost, XxxPostFormData} from "./xxx-post.types";
+import {Store} from "@ngrx/store";
 import * as XxxPostActions from './xxx-post.actions';
 import * as XxxPostSelectors from './xxx-post.selectors';
 
@@ -22,19 +22,19 @@ export class XxxPostFacadeService {
   constructor(private store: Store) {
   }
 
-  selectPost(postId: number): void {
+  dispatchGetUserPosts(): void {
+    this.store.dispatch(XxxPostActions.getUserPosts())
+  }
+
+  dispatchSelectPost(postId: number): void {
     this.store.dispatch(XxxPostActions.selectPost({postId}))
   }
 
-  setPostForm(postForm: XxxPostFormData): void {
-    this.store.dispatch(XxxPostActions.setPostForm({postForm}))
-  }
-
-  showUserPosts(): void {
-    this.store.dispatch(XxxPostActions.showUserPosts())
-  }
-
-  updatePost(): void {
+  dispatchUpdatePost(): void {
     this.store.dispatch(XxxPostActions.updatePost())
+  }
+
+  dispatchSetPostForm(postForm: XxxPostFormData): void {
+    this.store.dispatch(XxxPostActions.setPostForm({postForm}))
   }
 }
