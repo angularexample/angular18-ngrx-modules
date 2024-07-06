@@ -1,10 +1,13 @@
 <main>
-  <ng-container *ngIf="content$ | async; else xxxNoContent; let content">
+  @if (isContentLoading$ | async) {
+    Content loading...
+  } @else if (isContentEmpty$ | async) {
+    No content error
+  }
+  @if (content$|async; as content) {
     <section>
-      <h1>{{ content.pageTitle }}</h1>
-      <div class="xxx-body-content">{{ content.bodyText }}</div>
+      <h1>{{ content?.contentModel?.pageTitle }}</h1>
+      <div class="xxx-body-content">{{ content?.contentModel?.bodyText }}</div>
     </section>
-  </ng-container>
+  }
 </main>
-
-<ng-template #xxxNoContent>No content error</ng-template>

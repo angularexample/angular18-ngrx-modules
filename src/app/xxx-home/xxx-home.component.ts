@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {XxxContentService} from "../common/xxx-content/xxx-content.service";
 import {Observable} from "rxjs";
 import {XxxContent} from "../common/xxx-content/xxx-content.types";
+import {XxxContentFacadeService} from "../common/xxx-content/xxx-content-facade.service";
 
 @Component({
   selector: 'xxx-xxx-home',
@@ -10,8 +10,12 @@ import {XxxContent} from "../common/xxx-content/xxx-content.types";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxHomeComponent {
-  content$: Observable<XxxContent> = this.contentService.getContent('home');
+  private contentKey = 'home';
+  content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  isContentEmpty$ : Observable<boolean> = this.contentFacade.isContentEmpty$(this.contentKey);
+  isContentLoading$ : Observable<boolean> = this.contentFacade.isContentLoading$(this.contentKey);
 
-  constructor(private contentService: XxxContentService) {
+  constructor(private contentFacade: XxxContentFacadeService) {
+    this.contentFacade.getContent(this.contentKey);
   }
 }

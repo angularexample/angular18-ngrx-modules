@@ -1,14 +1,14 @@
 <main>
-<section>
-  <h2>Users</h2>
-</section>
+  <section>
+    <h2>Users</h2>
+  </section>
   @if (isUsersLoading$ | async) {
     <p>Loading...</p>
   } @else if (isUsersEmpty$ | async) {
     <p>None found.</p>
   } @else {
     <section *ngIf="isUsersLoaded$|async">
-      <h2 class="xxx-subheading">Select a User to View/Edit Posts</h2>
+      <h3>Select a User to View Posts</h3>
       <table class="xxx-table">
         <tr>
           <th class="xxx-table-cell-header">ID</th>
