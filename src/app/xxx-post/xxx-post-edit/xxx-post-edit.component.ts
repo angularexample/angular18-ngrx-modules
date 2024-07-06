@@ -28,7 +28,7 @@ export class XxxPostEditComponent {
   }
 
   onSubmit() {
-    this.xxxPostFacadeService.dispatchUpdatePost();
+    this.xxxPostFacadeService.updatePost();
   }
 
   private loadFormData(): void {
@@ -50,7 +50,7 @@ export class XxxPostEditComponent {
       debounceTime(300),
       distinctUntilChanged()
     ).subscribe(value => {
-      this.xxxPostFacadeService.dispatchSetPostForm(value);
+      this.xxxPostFacadeService.setPostForm(value);
     });
   }
 }
