@@ -8,6 +8,7 @@ import {XxxUserDataService} from "./xxx-user-data.service";
 import * as XxxUserActions from './xxx-user.actions';
 import {XxxUserApiResponse} from "./xxx-user.types";
 import * as XxxUserSelectors from "../xxx-user/xxx-user.selectors";
+import {XxxLoadingService} from "../common/xxx-loading/xxx-loading.service";
 
 @Injectable()
 export class XxxUserEffects {
@@ -15,13 +16,20 @@ export class XxxUserEffects {
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
     ofType(XxxUserActions.getUsers),
+      tap(()=>{this.loadingService.loadingOn()}),
       switchMap(() =>
-      this.xxxUserDataService.getUsers().pipe(
+      this.userDataService.getUsers().pipe(
         map((response: XxxUserApiResponse) => XxxUserActions.getUsersSuccess({payload: response})),
         catchError(() => of(XxxUserActions.getUsersError()))
       )
     )
   ));
+
+  getUsersFinalize$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(XxxUserActions.getUsersError, XxxUserActions.getUsersSuccess),
+      tap(()=>{this.loadingService.loadingOff()}),
+    ), {dispatch: false});
 
   selectUser$ = createEffect(() => this.actions$.pipe(
       ofType(XxxUserActions.selectUser),
@@ -44,7 +52,8 @@ export class XxxUserEffects {
     private actions$: Actions,
     private router: Router,
     private store: Store,
-    private xxxUserDataService: XxxUserDataService
+    private userDataService: XxxUserDataService,
+    private loadingService: XxxLoadingService
   ) {
   }
 }

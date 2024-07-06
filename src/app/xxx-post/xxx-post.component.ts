@@ -10,19 +10,19 @@ import {XxxPostFacadeService} from "./xxx-post-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxPostComponent {
-  isPostsLoaded$: Observable<boolean> = this.xxxPostFacadeService.isPostsLoaded$;
-  isPostsLoading$: Observable<boolean> = this.xxxPostFacadeService.isPostsLoading$;
-  isSelectedUser$: Observable<boolean> = this.xxxPostFacadeService.isSelectedUser$;
-  posts$: Observable<XxxPost[]> = this.xxxPostFacadeService.posts$;
-  selectedPostId$: Observable<number | undefined> = this.xxxPostFacadeService.selectedPostId$;
+  isPostsLoaded$: Observable<boolean> = this.postFacade.isPostsLoaded$;
+  isPostsLoading$: Observable<boolean> = this.postFacade.isPostsLoading$;
+  isSelectedUser$: Observable<boolean> = this.postFacade.isSelectedUser$;
+  posts$: Observable<XxxPost[]> = this.postFacade.posts$;
+  selectedPostId$: Observable<number | undefined> = this.postFacade.selectedPostId$;
 
   constructor(
-    private xxxPostFacadeService: XxxPostFacadeService
+    private postFacade: XxxPostFacadeService
   ) {
-    this.xxxPostFacadeService.dispatchGetUserPosts();
+    this.postFacade.dispatchGetUserPosts();
   }
 
   selectPost(post: XxxPost) {
-    this.xxxPostFacadeService.dispatchSelectPost(post.id);
+    this.postFacade.dispatchSelectPost(post.id);
   }
 }

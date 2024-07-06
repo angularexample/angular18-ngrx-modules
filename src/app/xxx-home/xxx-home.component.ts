@@ -10,10 +10,8 @@ import {XxxContentFacadeService} from "../common/xxx-content/xxx-content-facade.
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxHomeComponent {
-  private contentKey = 'home';
+  contentKey = 'home';
   content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
-  isContentEmpty$ : Observable<boolean> = this.contentFacade.isContentEmpty$(this.contentKey);
-  isContentLoading$ : Observable<boolean> = this.contentFacade.isContentLoading$(this.contentKey);
 
   constructor(private contentFacade: XxxContentFacadeService) {
     this.contentFacade.getContent(this.contentKey);

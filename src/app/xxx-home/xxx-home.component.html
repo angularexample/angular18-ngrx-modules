@@ -1,9 +1,5 @@
 <main>
-  @if (isContentLoading$ | async) {
-    Content loading...
-  } @else if (isContentEmpty$ | async) {
-    No content error
-  }
+  <xxx-content contentKey="{{contentKey}}"></xxx-content>
   @if (content$|async; as content) {
     <section>
       <h1>{{ content?.contentModel?.pageTitle }}</h1>

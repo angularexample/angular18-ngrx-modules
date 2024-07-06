@@ -14,8 +14,6 @@ import {XxxUserFacadeService} from "./xxx-user-facade.service";
 export class XxxUserComponent {
   contentKey: string = 'user';
   content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
-  isContentEmpty$ : Observable<boolean> = this.contentFacade.isContentEmpty$(this.contentKey);
-  isContentLoading$ : Observable<boolean> = this.contentFacade.isContentLoading$(this.contentKey);
   isUsersEmpty$: Observable<boolean> = this.userFacade.isUsersEmpty$;
   isUsersLoaded$: Observable<boolean> = this.userFacade.isUsersLoaded$;
   isUsersLoading$: Observable<boolean> = this.userFacade.isUsersLoading$;

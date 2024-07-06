@@ -1,4 +1,4 @@
-import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {NgModule} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {XxxContentModule} from "../common/xxx-content/xxx-content.module";
@@ -14,7 +14,6 @@ import {XxxHomeRoutingModule} from "./xxx-home-routing.module";
         RouterLinkActive,
         XxxContentModule,
         XxxHomeRoutingModule,
-        JsonPipe,
     ],
     exports: [XxxHomeComponent]
 })

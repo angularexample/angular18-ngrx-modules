@@ -27,3 +27,8 @@ export const selectIsContentEmpty = (key: string) => createSelector(
   selectContentByKey(key),
   (content: XxxContent | undefined): boolean => content !== undefined && content.status === XxxContentStatus.EMPTY
 );
+
+export const selectIsContentError = (key: string) => createSelector(
+  selectContentByKey(key),
+  (content: XxxContent | undefined): boolean => content !== undefined && content.status === XxxContentStatus.ERROR
+);

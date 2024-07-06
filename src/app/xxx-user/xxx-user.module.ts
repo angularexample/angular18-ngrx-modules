@@ -4,6 +4,7 @@ import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import {XxxUserComponent} from "./xxx-user.component";
 import {XxxUserRoutingModule} from "./xxx-user-routing.module";
 import {XxxUserStateModule} from "./xxx-user.state.module";
+import {XxxContentModule} from "../common/xxx-content/xxx-content.module";
 
 @NgModule({ declarations: [
         XxxUserComponent
@@ -11,6 +12,6 @@ import {XxxUserStateModule} from "./xxx-user.state.module";
         XxxUserRoutingModule,
         XxxUserStateModule,
         AsyncPipe,
-        JsonPipe], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        JsonPipe, XxxContentModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class XxxUserModule {
 }

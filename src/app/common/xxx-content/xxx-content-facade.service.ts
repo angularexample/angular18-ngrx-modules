@@ -10,6 +10,7 @@ import {XxxContent} from "./xxx-content.types";
 })
 export class XxxContentFacadeService {
   isContentEmpty$ = (key: string): Observable<boolean> => this.store.select(XxxContentSelectors.selectIsContentEmpty(key));
+  isContentError$ = (key: string): Observable<boolean> => this.store.select(XxxContentSelectors.selectIsContentError(key));
   isContentLoading$ = (key: string): Observable<boolean> => this.store.select(XxxContentSelectors.selectIsContentLoading(key));
   contentByKey$ = (key: string): Observable<XxxContent | undefined> => this.store.select(XxxContentSelectors.selectContentByKey(key))
 
