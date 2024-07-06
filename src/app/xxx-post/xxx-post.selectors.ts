@@ -35,6 +35,12 @@ export const selectSelectedUserId = createSelector(
   (selectedUserId: number | undefined) => selectedUserId
 )
 
+export const selectIsPostsEmpty = createSelector(
+  selectIsPostsLoading,
+  selectPosts,
+  (isLoading: boolean, posts: XxxPost[]) => !isLoading && posts && posts.length === 0
+);
+
 export const selectIsPostsLoaded = createSelector(
   selectIsPostsLoading,
   selectPosts,
@@ -89,7 +95,7 @@ export const selectIsSelectedPost = createSelector(
   (state: XxxPostState) => state.selectedPostId !== undefined
 );
 
-export const selectIsSelectedUser = createSelector(
-  XxxUserSelectors.selectIsSelectedUser,
-  (isSelectedUser) => isSelectedUser
+export const selectIsNoSelectedUser = createSelector(
+  XxxUserSelectors.selectIsNoSelectedUser,
+  (isNoSelectedUser) => isNoSelectedUser
 );

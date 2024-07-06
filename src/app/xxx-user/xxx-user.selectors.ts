@@ -23,9 +23,9 @@ export const selectIsUsersLoaded = createSelector(
   (users: XxxUser[]) => users.length > 0
 );
 
-export const selectIsSelectedUser = createSelector(
+export const selectIsNoSelectedUser = createSelector(
   selectSelectedUserId,
-  (userId: number | undefined) => (userId !== undefined),
+  (userId: number | undefined) => (userId === undefined),
 );
 
 export const selectIsUsersEmpty = createSelector(
