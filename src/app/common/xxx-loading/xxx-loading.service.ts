@@ -10,12 +10,10 @@ export class XxxLoadingService {
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
   loadingOn() {
-    console.log('~XxxLoadingService.loadingOn()')
     this.loadingSubject.next(true);
   }
 
   loadingOff() {
-    console.log('~XxxLoadingService.loadingOff()')
     this.loadingSubject.next(false);
   }
 }

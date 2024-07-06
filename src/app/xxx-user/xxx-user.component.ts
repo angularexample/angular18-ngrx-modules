@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs";
+import {XxxContent} from "../common/xxx-content/xxx-content.types";
+import {XxxContentFacadeService} from "../common/xxx-content/xxx-content-facade.service";
 import {XxxUser} from "./xxx-user.types";
 import {XxxUserFacadeService} from "./xxx-user-facade.service";
 
@@ -10,17 +12,24 @@ import {XxxUserFacadeService} from "./xxx-user-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxUserComponent {
-  isUsersEmpty$: Observable<boolean> = this.xxxUserFacadeService.isUsersEmpty$;
-  isUsersLoaded$: Observable<boolean> = this.xxxUserFacadeService.isUsersLoaded$;
-  isUsersLoading$: Observable<boolean> = this.xxxUserFacadeService.isUsersLoading$;
-  selectedUserId$: Observable<number | undefined> = this.xxxUserFacadeService.selectedUserId$;
-  users$: Observable<XxxUser[]> = this.xxxUserFacadeService.users$;
+  contentKey: string = 'user';
+  content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  isContentEmpty$ : Observable<boolean> = this.contentFacade.isContentEmpty$(this.contentKey);
+  isContentLoading$ : Observable<boolean> = this.contentFacade.isContentLoading$(this.contentKey);
+  isUsersEmpty$: Observable<boolean> = this.userFacade.isUsersEmpty$;
+  isUsersLoaded$: Observable<boolean> = this.userFacade.isUsersLoaded$;
+  isUsersLoading$: Observable<boolean> = this.userFacade.isUsersLoading$;
+  selectedUserId$: Observable<number | undefined> = this.userFacade.selectedUserId$;
+  users$: Observable<XxxUser[]> = this.userFacade.users$;
 
-  constructor(private xxxUserFacadeService: XxxUserFacadeService) {
-    this.xxxUserFacadeService.dispatchShowUsers();
+  constructor(
+    private contentFacade: XxxContentFacadeService,
+    private userFacade: XxxUserFacadeService) {
+    this.contentFacade.getContent(this.contentKey)
+    this.userFacade.dispatchShowUsers();
   }
 
   rowClick(user: XxxUser) {
-    this.xxxUserFacadeService.dispatchSelectUser(user.id);
+    this.userFacade.dispatchSelectUser(user.id);
   }
 }
