@@ -1,29 +1,31 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {StoreModule} from '@ngrx/store';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
 import {EffectsModule} from '@ngrx/effects';
+import {environment} from '../environments/environment';
+import {NgModule} from '@angular/core';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {environment} from '../environments/environment';
-import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {StoreModule} from '@ngrx/store';
+import {XxxCommonModule} from "./xxx-common/xxx-common.module";
 import {XxxHeaderModule} from "./xxx-header/xxx-header.module";
-import {XxxLoadingModule} from "./common/xxx-loading/xxx-loading.module";
 
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  imports: [BrowserModule,
+  imports: [
     AppRoutingModule,
-    XxxHeaderModule,
-    XxxLoadingModule,
-    StoreModule.forRoot({}, {}),
+    BrowserModule,
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}), XxxLoadingModule],
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    StoreModule.forRoot({}, {}),
+    XxxCommonModule,
+    XxxHeaderModule,
+  ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi()),
   ]
 })
 export class AppModule {

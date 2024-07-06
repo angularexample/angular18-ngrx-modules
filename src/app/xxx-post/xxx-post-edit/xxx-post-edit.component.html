@@ -3,36 +3,37 @@
 <main>
   <section>
     <h1>Edit Post</h1>
-    <div *ngIf="(isSelectedPost$ | async); else xxxNoSelectedPost">
-      <section>
-        <h2>Edit Post</h2>
-        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-user-id">User Id</label>
-            <div class="xxx-form-text-value" id="xxx-post-user-id">{{ (selectedPost$ | async)?.userId }}</div>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-id">Post Id</label>
-            <div class="xxx-form-text-value" id="xxx-post-id" >{{ (selectedPost$ | async)?.id }}</div>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-title">Title</label>
-            <input formControlName="title" id="xxx-post-title" type="text"/>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-body">Body</label>
-            <input formControlName="body" id="xxx-post-body" type="text" />
-          </div>
-          <div class="xxx-form-row">
-            <input [disabled]="(iSaveButtonDisabled$ | async)" type="submit" value="Save Post">
-          </div>
-        </form>
-      </section>
-    </div>
+    @if ((isSelectedPost$ | async)) {
+      <div>
+        <section>
+          <h2>Edit Post</h2>
+          <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <div class="xxx-form-row">
+              <label class="xxx-form-caption" for="xxx-post-user-id">User Id</label>
+              <div class="xxx-form-text-value" id="xxx-post-user-id">{{ (selectedPost$ | async)?.userId }}</div>
+            </div>
+            <div class="xxx-form-row">
+              <label class="xxx-form-caption" for="xxx-post-id">Post Id</label>
+              <div class="xxx-form-text-value" id="xxx-post-id" >{{ (selectedPost$ | async)?.id }}</div>
+            </div>
+            <div class="xxx-form-row">
+              <label class="xxx-form-caption" for="xxx-post-title">Title</label>
+              <input formControlName="title" id="xxx-post-title" type="text"/>
+            </div>
+            <div class="xxx-form-row">
+              <label class="xxx-form-caption" for="xxx-post-body">Body</label>
+              <input formControlName="body" id="xxx-post-body" type="text" />
+            </div>
+            <div class="xxx-form-row">
+              <input [disabled]="(iSaveButtonDisabled$ | async)" type="submit" value="Save Post">
+            </div>
+          </form>
+        </section>
+      </div>
+    } @else {
+      <div>There is no selected post.</div>
+      <div>Go to Posts page to select a post.</div>
+    }
   </section>
 </main>
 
-<ng-template #xxxNoSelectedPost>
-  <div>There is no selected post.</div>
-  <div>Go to Posts page to select a post.</div>
-</ng-template>

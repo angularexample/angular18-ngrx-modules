@@ -8,7 +8,7 @@ import {XxxUserDataService} from "./xxx-user-data.service";
 import * as XxxUserActions from './xxx-user.actions';
 import {XxxUserApiResponse} from "./xxx-user.types";
 import * as XxxUserSelectors from "../xxx-user/xxx-user.selectors";
-import {XxxLoadingService} from "../common/xxx-loading/xxx-loading.service";
+import {XxxLoadingService} from "../xxx-common/xxx-loading/xxx-loading.service";
 
 @Injectable()
 export class XxxUserEffects {

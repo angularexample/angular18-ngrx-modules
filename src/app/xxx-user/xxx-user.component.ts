@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs";
-import {XxxContent} from "../common/xxx-content/xxx-content.types";
-import {XxxContentFacadeService} from "../common/xxx-content/xxx-content-facade.service";
+import {XxxContent} from "../xxx-common/xxx-content/xxx-content.types";
+import {XxxContentFacadeService} from "../xxx-common/xxx-content/xxx-content-facade.service";
 import {XxxUser} from "./xxx-user.types";
 import {XxxUserFacadeService} from "./xxx-user-facade.service";
 

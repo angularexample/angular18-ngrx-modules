@@ -3,28 +3,31 @@
 <main>
   <section>
     <h1>Posts</h1>
-    <div *ngIf="(isSelectedUser$ | async); else xxxNoSelectedUser">
-      <div>Select a Post to View/Edit</div>
-      <table class="xxx-table">
-        <tr>
-          <th class="xxx-table-cell-header">Id</th>
-          <th class="xxx-table-cell-header">Title</th>
-          <th class="xxx-table-cell-header">Body</th>
-        </tr>
-        <tr *ngFor="let post of posts$ | async"
-            class="xxx-table-row"
-            [class.active]="(selectedPostId$|async)===post.id"
-            (click)="selectPost(post)">
-          <td class="xxx-table-cell">{{post.id}}</td>
-          <td class="xxx-table-cell">{{post.title}}</td>
-          <td class="xxx-table-cell">{{post.body}}</td>
-        </tr>
-      </table>
-    </div>
+    @if ((isSelectedUser$ | async)) {
+      <div>
+        <div>Select a Post to View/Edit</div>
+        <table class="xxx-table">
+          <tr>
+            <th class="xxx-table-cell-header">Id</th>
+            <th class="xxx-table-cell-header">Title</th>
+            <th class="xxx-table-cell-header">Body</th>
+          </tr>
+          @for (post of posts$ | async; track post) {
+            <tr
+              class="xxx-table-row"
+              [class.active]="(selectedPostId$|async)===post.id"
+              (click)="selectPost(post)">
+              <td class="xxx-table-cell">{{post.id}}</td>
+              <td class="xxx-table-cell">{{post.title}}</td>
+              <td class="xxx-table-cell">{{post.body}}</td>
+            </tr>
+          }
+        </table>
+      </div>
+    } @else {
+      <div>There is no selected user.</div>
+      <div>Go to User page to select a user.</div>
+    }
   </section>
 </main>
 
-<ng-template #xxxNoSelectedUser>
-  <div>There is no selected user.</div>
-  <div>Go to User page to select a user.</div>
-</ng-template>

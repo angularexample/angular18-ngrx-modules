@@ -1,11 +1,12 @@
+import {AsyncPipe} from "@angular/common";
 import {NgModule} from '@angular/core';
-import {XxxPostComponent} from "./xxx-post.component";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-import {AsyncPipe, CommonModule} from "@angular/common";
+import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import {XxxCommonModule} from "../xxx-common/xxx-common.module";
+import {XxxPostEditComponent} from "./xxx-post-edit/xxx-post-edit.component";
+import {XxxPostComponent} from "./xxx-post.component";
 import {XxxPostStateModule} from "./xxx-post.state.module";
 import {XxxPostRoutingModule} from "./xxx-post-routing.module";
-import {XxxPostEditComponent} from "./xxx-post-edit/xxx-post-edit.component";
 
 @NgModule({
   declarations: [
@@ -13,11 +14,11 @@ import {XxxPostEditComponent} from "./xxx-post-edit/xxx-post-edit.component";
     XxxPostEditComponent
   ],
   imports: [
-    CommonModule,
-        AsyncPipe,
-        ReactiveFormsModule,
-        XxxPostStateModule,
-        XxxPostRoutingModule
+    AsyncPipe,
+    ReactiveFormsModule,
+    XxxCommonModule,
+    XxxPostStateModule,
+    XxxPostRoutingModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())
