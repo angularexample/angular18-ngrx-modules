@@ -1,12 +1,13 @@
-import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, filter, map, of, switchMap, tap} from 'rxjs';
 import {concatLatestFrom} from "@ngrx/operators";
+import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {XxxUserDataService} from "./xxx-user-data.service";
+import {XxxAlertService} from "../xxx-common/xxx-alert/xxx-alert.service";
 import * as XxxUserActions from './xxx-user.actions';
 import {XxxUserApiResponse} from "./xxx-user.types";
+import {XxxUserDataService} from "./xxx-user-data.service";
 import * as XxxUserSelectors from "../xxx-user/xxx-user.selectors";
 import {XxxLoadingService} from "../xxx-common/xxx-loading/xxx-loading.service";
 
@@ -15,20 +16,33 @@ export class XxxUserEffects {
 
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
-    ofType(XxxUserActions.getUsers),
-      tap(()=>{this.loadingService.loadingOn()}),
+      ofType(XxxUserActions.getUsers),
+      tap(() => {
+        this.loadingService.loadingOn()
+      }),
       switchMap(() =>
-      this.userDataService.getUsers().pipe(
-        map((response: XxxUserApiResponse) => XxxUserActions.getUsersSuccess({payload: response})),
-        catchError(() => of(XxxUserActions.getUsersError()))
+        this.userDataService.getUsers().pipe(
+          map((response: XxxUserApiResponse) => XxxUserActions.getUsersSuccess({payload: response})),
+          catchError(() => of(XxxUserActions.getUsersError()))
+        )
       )
-    )
-  ));
+    ));
 
-  getUsersFinalize$ = createEffect(() =>
+  getUsersError$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(XxxUserActions.getUsersError, XxxUserActions.getUsersSuccess),
-      tap(()=>{this.loadingService.loadingOff()}),
+      ofType(XxxUserActions.getUsersError),
+      tap(() => {
+        this.loadingService.loadingOff();
+        this.alertService.showError('Error occurred while fetching users.');
+      }),
+    ), {dispatch: false});
+
+  getUsersSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(XxxUserActions.getUsersSuccess),
+      tap(() => {
+        this.loadingService.loadingOff()
+      }),
     ), {dispatch: false});
 
   selectUser$ = createEffect(() => this.actions$.pipe(
@@ -52,8 +66,9 @@ export class XxxUserEffects {
     private actions$: Actions,
     private router: Router,
     private store: Store,
+    private alertService: XxxAlertService,
+    private loadingService: XxxLoadingService,
     private userDataService: XxxUserDataService,
-    private loadingService: XxxLoadingService
   ) {
   }
 }

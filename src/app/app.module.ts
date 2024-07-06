@@ -1,5 +1,6 @@
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from '@angular/platform-browser';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../environments/environment';
@@ -17,6 +18,7 @@ import {XxxHeaderModule} from "./xxx-header/xxx-header.module";
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     StoreModule.forRoot({}, {}),

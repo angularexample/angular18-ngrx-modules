@@ -8,7 +8,15 @@ export class XxxAlertService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  showAlert(message: string): void {
-      this.snackBar.open(message);
+  showError(message: string): void {
+    this.snackBar.open(message, 'X', {panelClass: ['xxx-alert-error'], verticalPosition: 'top'});
+  }
+
+  showInfo(message: string): void {
+      this.snackBar.open(message, 'X', {duration: 5000, panelClass: ['xxx-alert-info']});
+  }
+
+  showWarning(message: string): void {
+    this.snackBar.open(message, 'X', {duration: 10000, panelClass: ['xxx-alert-warning']});
   }
 }
