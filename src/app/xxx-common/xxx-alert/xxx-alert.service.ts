@@ -13,10 +13,10 @@ export class XxxAlertService {
   }
 
   showInfo(message: string): void {
-      this.snackBar.open(message, 'X', {duration: 5000, panelClass: ['xxx-alert-info']});
+      this.snackBar.open(message, 'X', {duration: 5000, panelClass: ['xxx-alert-info'], verticalPosition: 'top'});
   }
 
   showWarning(message: string): void {
-    this.snackBar.open(message, 'X', {duration: 10000, panelClass: ['xxx-alert-warning']});
+    this.snackBar.open(message, 'X', {duration: 10000, panelClass: ['xxx-alert-warning'], verticalPosition: 'top'});
   }
 }
