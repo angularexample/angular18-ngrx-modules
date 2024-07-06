@@ -9,13 +9,12 @@ import * as XxxPostSelectors from './xxx-post.selectors';
   providedIn: 'root'
 })
 export class XxxPostFacadeService {
+  isNoSelectedPost$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsNoSelectedPost);
+  isNoSelectedUser$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsNoSelectedUser);
   isPostsEmpty$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsEmpty);
   isPostsLoaded$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoaded);
   isPostsLoading$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostsLoading);
-  isPostUpdating$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsPostUpdating);
   isSaveButtonDisabled$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSaveButtonDisabled);
-  isSelectedPost$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsSelectedPost);
-  isNoSelectedUser$: Observable<boolean> = this.store.select(XxxPostSelectors.selectIsNoSelectedUser);
   posts$: Observable<XxxPost[]> = this.store.select(XxxPostSelectors.selectPosts);
   selectedPost$: Observable<XxxPost | undefined> = this.store.select(XxxPostSelectors.selectSelectedPost);
   selectedPostId$: Observable<number | undefined> = this.store.select(XxxPostSelectors.selectSelectedPostId);
@@ -23,19 +22,19 @@ export class XxxPostFacadeService {
   constructor(private store: Store) {
   }
 
-  dispatchGetUserPosts(): void {
+  getUserPosts(): void {
     this.store.dispatch(XxxPostActions.getUserPosts())
   }
 
-  dispatchSelectPost(postId: number): void {
+  selectPost(postId: number): void {
     this.store.dispatch(XxxPostActions.selectPost({postId}))
   }
 
-  dispatchUpdatePost(): void {
-    this.store.dispatch(XxxPostActions.updatePost())
+  setPostForm(postForm: XxxPostFormData): void {
+    this.store.dispatch(XxxPostActions.setPostForm({postForm}))
   }
 
-  dispatchSetPostForm(postForm: XxxPostFormData): void {
-    this.store.dispatch(XxxPostActions.setPostForm({postForm}))
+  updatePost(): void {
+    this.store.dispatch(XxxPostActions.updatePost())
   }
 }

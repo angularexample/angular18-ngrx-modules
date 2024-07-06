@@ -3,6 +3,8 @@ import {debounceTime, distinctUntilChanged, Observable, take} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {XxxPost, XxxPostFormData, xxxPostFormDataInitial} from "../xxx-post.types";
 import {XxxPostFacadeService} from "../xxx-post-facade.service";
+import {XxxContent} from "../../xxx-common/xxx-content/xxx-content.types";
+import {XxxContentFacadeService} from "../../xxx-common/xxx-content/xxx-content-facade.service";
 
 @Component({
   selector: 'xxx-post-edit',
@@ -11,24 +13,27 @@ import {XxxPostFacadeService} from "../xxx-post-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxPostEditComponent {
-  isPostUpdating$: Observable<boolean> = this.xxxPostFacadeService.isPostUpdating$;
-  isSelectedPost$: Observable<boolean> = this.xxxPostFacadeService.isSelectedPost$;
-  iSaveButtonDisabled$: Observable<boolean> = this.xxxPostFacadeService.isSaveButtonDisabled$;
+  contentKey: string = 'post-edit';
+  content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  isNoSelectedPost$: Observable<boolean> = this.postFacade.isNoSelectedPost$;
+  isSaveButtonDisabled$: Observable<boolean> = this.postFacade.isSaveButtonDisabled$;
   postForm: FormGroup = new FormGroup({
     body: new FormControl(xxxPostFormDataInitial.body, Validators.required),
     title: new FormControl(xxxPostFormDataInitial.title, Validators.required)
   });
-  selectedPost$: Observable<XxxPost | undefined> = this.xxxPostFacadeService.selectedPost$;
+  selectedPost$: Observable<XxxPost | undefined> = this.postFacade.selectedPost$;
 
   constructor(
-    private xxxPostFacadeService: XxxPostFacadeService
+    private contentFacade: XxxContentFacadeService,
+    private postFacade: XxxPostFacadeService
   ) {
+    this.contentFacade.getContent(this.contentKey)
     this.loadFormData();
     this.subscribeToFormChanges();
   }
 
   onSubmit() {
-    this.xxxPostFacadeService.dispatchUpdatePost();
+    this.postFacade.updatePost();
   }
 
   private loadFormData(): void {
@@ -50,7 +55,7 @@ export class XxxPostEditComponent {
       debounceTime(300),
       distinctUntilChanged()
     ).subscribe(value => {
-      this.xxxPostFacadeService.dispatchSetPostForm(value);
+      this.postFacade.setPostForm(value);
     });
   }
 }

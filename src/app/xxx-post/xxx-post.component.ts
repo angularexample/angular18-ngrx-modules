@@ -14,10 +14,10 @@ import {XxxContent} from "../xxx-common/xxx-content/xxx-content.types";
 export class XxxPostComponent {
   contentKey: string = 'post';
   content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  isNoSelectedUser$: Observable<boolean> = this.postFacade.isNoSelectedUser$;
   isPostsEmpty$: Observable<boolean> = this.postFacade.isPostsEmpty$;
   isPostsLoaded$: Observable<boolean> = this.postFacade.isPostsLoaded$;
   isPostsLoading$: Observable<boolean> = this.postFacade.isPostsLoading$;
-  isNoSelectedUser$: Observable<boolean> = this.postFacade.isNoSelectedUser$;
   posts$: Observable<XxxPost[]> = this.postFacade.posts$;
   selectedPostId$: Observable<number | undefined> = this.postFacade.selectedPostId$;
 
@@ -26,10 +26,10 @@ export class XxxPostComponent {
     private postFacade: XxxPostFacadeService
   ) {
     this.contentFacade.getContent(this.contentKey)
-    this.postFacade.dispatchGetUserPosts();
+    this.postFacade.getUserPosts();
   }
 
   selectPost(post: XxxPost) {
-    this.postFacade.dispatchSelectPost(post.id);
+    this.postFacade.selectPost(post.id);
   }
 }

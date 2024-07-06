@@ -4,7 +4,7 @@
     <section>
       <h2>{{ content?.contentModel?.pageTitle }}</h2>
     </section>
-    @if (isNoSelectedUser$|async) {
+    @if (isNoSelectedUser$ | async) {
       <div>There is no selected user.</div>
       <div>Go to User page to select a user.</div>
     }

@@ -90,9 +90,9 @@ export const selectIsUserState = createSelector(
   (userState: XxxUserState | undefined) => !!userState
 );
 
-export const selectIsSelectedPost = createSelector(
+export const selectIsNoSelectedPost = createSelector(
   selectPostState,
-  (state: XxxPostState) => state.selectedPostId !== undefined
+  (state: XxxPostState) => state.selectedPostId === undefined
 );
 
 export const selectIsNoSelectedUser = createSelector(
