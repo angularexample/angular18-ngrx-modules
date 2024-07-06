@@ -12,6 +12,13 @@ this.http.get("/api/courses", {
 To show loading during router route transitions
 add the attribute to the loading element as in this example
 <xxx-loading [detectRouteTransitions]="true"></xxx-loading>
+
+ To use the http interceptor add this to the app module providers
+     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XxxLoadingInterceptor,
+      multi: true,
+    },
  */
 @Component({
   selector: 'xxx-loading',
