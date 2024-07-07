@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {XxxPost, xxxPostFeatureName, XxxPostFormData, XxxPostState} from "./xxx-post.types";
+import {XxxPost, xxxPostFeatureName, XxxPostState} from "./xxx-post.types";
 import * as XxxUserSelectors from '../xxx-user/xxx-user.selectors';
 import {XxxUserState} from "../xxx-user/xxx-user.types";
 
@@ -59,29 +59,13 @@ export const selectSelectedPost = createSelector(
   }
 );
 
-export const selectEditedPost = createSelector(
-  selectSelectedPost,
-  selectPostForm,
-  (selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
-    let editedPost: XxxPost | undefined;
-    if (selectedPost && postForm) {
-      editedPost = {
-        ...selectedPost,
-        //...postForm
-      };
-    }
-    return editedPost
-  }
-);
-
 export const selectIsSaveButtonDisabled = createSelector(
   selectIsPostUpdating,
   selectIsPostsLoaded,
   selectSelectedPost,
   selectPostForm,
-  (isPostsUpdating: boolean, isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPostFormData | undefined) => {
-    const oldPost: XxxPostFormData = <XxxPostFormData>selectedPost;
-    return isPostsUpdating || (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(oldPost) === JSON.stringify(postForm))
+  (isPostsUpdating: boolean, isPostsLoaded: boolean, selectedPost: XxxPost | undefined, postForm: XxxPost | undefined) => {
+    return isPostsUpdating || (!isPostsLoaded) || (selectedPost === undefined) || (postForm === undefined) || (JSON.stringify(selectedPost) === JSON.stringify(postForm))
   }
 );
 

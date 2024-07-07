@@ -12,7 +12,8 @@ export class XxxUserDataService {
   }
 
   getUsers(): Observable<XxxUserApiResponse> {
-    const url = 'https://dummyjson.com/users/?delay=3000'
+    // const url = 'https://dummyjson.com/users/?delay=3000'
+    const url = 'https://dummyjson.com/users';
     return this.http.get<XxxUserApiResponse>(url);
   }
 }

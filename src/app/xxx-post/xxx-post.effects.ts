@@ -49,7 +49,7 @@ export class XxxPostEffects {
   updatePosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(XxxPostActions.updatePost),
-      concatLatestFrom(() => this.store.select(XxxPostSelectors.selectEditedPost)),
+      concatLatestFrom(() => this.store.select(XxxPostSelectors.selectPostForm)),
       map(([_arg1, arg2]) => arg2),
       switchMap((post: XxxPost | undefined) => {
         if (post !== undefined) {

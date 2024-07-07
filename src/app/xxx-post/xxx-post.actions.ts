@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {XxxPost, xxxPostFeatureName, XxxPostFormData, XxxPostResponse} from "./xxx-post.types";
+import {XxxPost, xxxPostFeatureName, XxxPostResponse} from "./xxx-post.types";
 
 export const getUserPosts = createAction(
   `${xxxPostFeatureName}.getUserPosts`
@@ -21,7 +21,7 @@ export const selectPost = createAction(
 
 export const setPostForm = createAction(
   `${xxxPostFeatureName}.setPostForm`,
-  props<{ postForm: XxxPostFormData }>()
+  props<{ post: XxxPost }>()
 );
 
 export const updatePost = createAction(

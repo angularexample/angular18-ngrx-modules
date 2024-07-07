@@ -11,28 +11,17 @@
       <section>
         <h3>{{ content?.contentModel?.bodyText }}</h3>
         <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-user-id">User Id</label>
-            <div class="xxx-form-text-value" id="xxx-post-user-id">{{ (selectedPost$ | async)?.userId }}</div>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-id">Post Id</label>
-            <div class="xxx-form-text-value" id="xxx-post-id">{{ (selectedPost$ | async)?.id }}</div>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-title">Title</label>
-            <input formControlName="title" id="xxx-post-title" size="80" maxlength="80" type="text"/>
-          </div>
-          <div class="xxx-form-row">
-            <label class="xxx-form-caption" for="xxx-post-body">Body</label>
-            <textarea cols="80" formControlName="body" id="xxx-post-body" maxlength="255" rows="4"></textarea>
-          </div>
-          <div class="xxx-form-row">
-            <input [disabled]="(isSaveButtonDisabled$ | async)" type="submit" value="Save Post">
-          </div>
+          <label for="xxx-user-id">User Id</label>
+          <input formControlName="userId" id="xxx-user-id" readonly>
+          <label for="xxx-id">Id</label>
+          <input formControlName="id" id="xxx-id" readonly>
+          <label for="xxx-post-title">Title</label>
+          <input formControlName="title" id="xxx-post-title" size="80" maxlength="80" type="text"/>
+          <label for="xxx-post-body">Body</label>
+          <textarea cols="80" formControlName="body" id="xxx-post-body" maxlength="255" rows="4"></textarea>
+          <input [disabled]="(isSaveButtonDisabled$ | async)" type="submit" value="Save Post">
         </form>
       </section>
     }
   }
 </main>
-

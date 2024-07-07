@@ -1,8 +1,8 @@
 export interface XxxPost {
-  userId: number;
+  body: string;
   id: number;
   title: string;
-  body: string;
+  userId: number;
 }
 
 export interface XxxPostResponse {
@@ -11,14 +11,11 @@ export interface XxxPostResponse {
 
 export const xxxPostFeatureName = 'xxxPost';
 
-export interface XxxPostFormData {
-  title: string;
-  body: string;
-}
-
-export const xxxPostFormDataInitial: XxxPostFormData = {
+export const xxxPostFormDataInitial: XxxPost = {
   body: '',
-  title: ''
+  id: 0,
+  title: '',
+  userId: 0,
 };
 
 export const xxxPostInitialState: XxxPostState = {
@@ -30,7 +27,7 @@ export const xxxPostInitialState: XxxPostState = {
 export interface XxxPostState {
   isPostsLoading: boolean;
   isPostUpdating: boolean;
-  postForm?: XxxPostFormData;
+  postForm?: XxxPost;
   posts: XxxPost[];
   selectedPostId?: number;
 }

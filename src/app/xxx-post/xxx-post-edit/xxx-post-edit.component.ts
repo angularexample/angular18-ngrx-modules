@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {debounceTime, distinctUntilChanged, Observable, take} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {XxxPost, XxxPostFormData, xxxPostFormDataInitial} from "../xxx-post.types";
+import {XxxPost, xxxPostFormDataInitial} from "../xxx-post.types";
 import {XxxPostFacadeService} from "../xxx-post-facade.service";
 import {XxxContent} from "../../xxx-common/xxx-content/xxx-content.types";
 import {XxxContentFacadeService} from "../../xxx-common/xxx-content/xxx-content-facade.service";
@@ -19,7 +19,9 @@ export class XxxPostEditComponent {
   isSaveButtonDisabled$: Observable<boolean> = this.postFacade.isSaveButtonDisabled$;
   postForm: FormGroup = new FormGroup({
     body: new FormControl(xxxPostFormDataInitial.body, Validators.required),
-    title: new FormControl(xxxPostFormDataInitial.title, Validators.required)
+    id: new FormControl(xxxPostFormDataInitial.id),
+    title: new FormControl(xxxPostFormDataInitial.title, Validators.required),
+    userId: new FormControl(xxxPostFormDataInitial.userId)
   });
   selectedPost$: Observable<XxxPost | undefined> = this.postFacade.selectedPost$;
 
@@ -40,12 +42,8 @@ export class XxxPostEditComponent {
     this.selectedPost$.pipe(
       take(1)
     ).subscribe((post: XxxPost | undefined): void => {
-      if (post) {
-        const formData: XxxPostFormData = {
-          body: post.body,
-          title: post.title,
-        };
-        this.postForm.setValue(formData);
+      if (post !== undefined) {
+        this.postForm.setValue(post);
       }
     })
   }
