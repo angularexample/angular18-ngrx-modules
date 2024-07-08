@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
 import {debounceTime, distinctUntilChanged, Observable, take} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {XxxPost, xxxPostFormDataInitial} from "../xxx-post.types";
 import {XxxPostFacadeService} from "../xxx-post-facade.service";
 import {XxxContent} from "../../xxx-common/xxx-content/xxx-content.types";
 import {XxxContentFacadeService} from "../../xxx-common/xxx-content/xxx-content-facade.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'xxx-post-edit',
@@ -15,6 +16,7 @@ import {XxxContentFacadeService} from "../../xxx-common/xxx-content/xxx-content-
 export class XxxPostEditComponent {
   contentKey: string = 'post-edit';
   content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  private destroyRef = inject(DestroyRef);
   isNoSelectedPost$: Observable<boolean> = this.postFacade.isNoSelectedPost$;
   isSaveButtonDisabled$: Observable<boolean> = this.postFacade.isSaveButtonDisabled$;
   postForm: FormGroup = new FormGroup({
@@ -40,7 +42,7 @@ export class XxxPostEditComponent {
 
   private loadFormData(): void {
     this.selectedPost$.pipe(
-      take(1)
+      takeUntilDestroyed(this.destroyRef),
     ).subscribe((post: XxxPost | undefined): void => {
       if (post !== undefined) {
         this.postForm.setValue(post);
@@ -51,7 +53,8 @@ export class XxxPostEditComponent {
   private subscribeToFormChanges(): void {
     this.postForm.valueChanges.pipe(
       debounceTime(300),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef),
     ).subscribe(value => {
       this.postFacade.setPostForm(value);
     });
