@@ -20,9 +20,6 @@
             <span class="xxx-label-required">*</span>
           </label>
           <input formControlName="title" id="xxx-post-title" size="80" maxlength="80" type="text"/>
-          @if (postForm.controls['title'].invalid && (postForm.controls['title'].dirty || postForm.controls['title'].touched)) {
-            <div class="alert alert-danger"></div>
-          }
           @if (postForm.controls['title'].errors?.['required']) {
             <div class="xxx-input-validation">Title is required.</div>
           }
@@ -31,9 +28,6 @@
             <span class="xxx-label-required">*</span>
           </label>
           <textarea cols="80" formControlName="body" id="xxx-post-body" maxlength="255" rows="4"></textarea>
-          @if (postForm.controls['body'].invalid && (postForm.controls['body'].dirty || postForm.controls['body'].touched)) {
-            <div class="alert alert-danger"></div>
-          }
           @if (postForm.controls['body'].errors?.['required']) {
             <div class="xxx-input-validation">Body is required.</div>
           }
