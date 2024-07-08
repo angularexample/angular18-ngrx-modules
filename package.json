@@ -2,6 +2,10 @@
   "name": "angular18-ngrx-modules",
   "version": "18.0.1",
   "description": "Angular 18 NgRx using modules",
+  "author": {
+    "name": "JC Lango",
+    "email": "info@angularexample.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
