@@ -15,11 +15,29 @@
           <input formControlName="userId" id="xxx-user-id" readonly>
           <label for="xxx-id">Id</label>
           <input formControlName="id" id="xxx-id" readonly>
-          <label for="xxx-post-title">Title</label>
+          <label for="xxx-post-title">
+            Title
+            <span class="xxx-label-required">*</span>
+          </label>
           <input formControlName="title" id="xxx-post-title" size="80" maxlength="80" type="text"/>
-          <label for="xxx-post-body">Body</label>
+          @if (postForm.controls['title'].invalid && (postForm.controls['title'].dirty || postForm.controls['title'].touched)) {
+            <div class="alert alert-danger"></div>
+          }
+          @if (postForm.controls['title'].errors?.['required']) {
+            <div class="xxx-input-validation">Title is required.</div>
+          }
+          <label for="xxx-post-body">
+            Body
+            <span class="xxx-label-required">*</span>
+          </label>
           <textarea cols="80" formControlName="body" id="xxx-post-body" maxlength="255" rows="4"></textarea>
-          <input [disabled]="(isSaveButtonDisabled$ | async)" type="submit" value="Save Post">
+          @if (postForm.controls['body'].invalid && (postForm.controls['body'].dirty || postForm.controls['body'].touched)) {
+            <div class="alert alert-danger"></div>
+          }
+          @if (postForm.controls['body'].errors?.['required']) {
+            <div class="xxx-input-validation">Body is required.</div>
+          }
+          <input [disabled]="(isSaveButtonDisabled$ | async) || postForm.invalid" type="submit" value="Save Post">
         </form>
       </section>
     }
