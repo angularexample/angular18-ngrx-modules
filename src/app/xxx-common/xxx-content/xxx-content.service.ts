@@ -1,15 +1,13 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {XxxContent} from "./xxx-content.types";
+import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { XxxContent } from "./xxx-content.types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class XxxContentService {
-
-  constructor(private http: HttpClient) {
-  }
+  private http: HttpClient = inject(HttpClient);
 
   /**
    * Get content for a given page or section.

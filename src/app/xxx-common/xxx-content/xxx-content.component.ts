@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {XxxContentFacadeService} from "./xxx-content-facade.service";
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { Observable } from "rxjs";
+import { XxxContentFacadeService } from "./xxx-content-facade.service";
 
 @Component({
   selector: 'xxx-content',
@@ -9,12 +9,11 @@ import {XxxContentFacadeService} from "./xxx-content-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxContentComponent implements OnInit {
-  @Input({ required: true }) contentKey!: string;
-  isContentEmpty$: Observable<boolean> | undefined;
-  isContentError$: Observable<boolean> | undefined;
-  isContentLoading$: Observable<boolean> | undefined;
-
-  constructor(private contentFacade: XxxContentFacadeService) {}
+  @Input({required: true}) contentKey!: string;
+  protected isContentEmpty$: Observable<boolean> | undefined;
+  protected isContentError$: Observable<boolean> | undefined;
+  protected isContentLoading$: Observable<boolean> | undefined;
+  private contentFacade: XxxContentFacadeService = inject(XxxContentFacadeService);
 
   ngOnInit(): void {
     this.isContentEmpty$ = this.contentFacade.isContentEmpty$(this.contentKey);

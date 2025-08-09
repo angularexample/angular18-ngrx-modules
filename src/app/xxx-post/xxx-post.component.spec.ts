@@ -8,9 +8,9 @@ describe('XxxUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ XxxPostComponent ]
+      declarations: [XxxPostComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(XxxPostComponent);
     component = fixture.componentInstance;

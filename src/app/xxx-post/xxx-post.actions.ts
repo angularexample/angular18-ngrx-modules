@@ -1,5 +1,5 @@
-import {createAction, props} from '@ngrx/store';
-import {XxxPost, xxxPostFeatureName, XxxPostResponse} from "./xxx-post.types";
+import { createAction, props } from '@ngrx/store';
+import { XxxPost, xxxPostFeatureName, XxxPostResponse } from "./xxx-post.types";
 
 export const getUserPosts = createAction(
   `${xxxPostFeatureName}.getUserPosts`

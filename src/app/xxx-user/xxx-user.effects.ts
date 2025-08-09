@@ -1,18 +1,24 @@
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, filter, map, of, switchMap, tap} from 'rxjs';
-import {concatLatestFrom} from "@ngrx/operators";
-import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {Store} from "@ngrx/store";
-import {XxxAlertService} from "../xxx-common/xxx-alert/xxx-alert.service";
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { concatLatestFrom } from "@ngrx/operators";
+import { inject, Injectable } from '@angular/core';
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { XxxAlertService } from "../xxx-common/xxx-alert/xxx-alert.service";
 import * as XxxUserActions from './xxx-user.actions';
-import {XxxUserApiResponse} from "./xxx-user.types";
-import {XxxUserDataService} from "./xxx-user-data.service";
+import { XxxUserApiResponse } from "./xxx-user.types";
+import { XxxUserDataService } from "./xxx-user-data.service";
 import * as XxxUserSelectors from "../xxx-user/xxx-user.selectors";
-import {XxxLoadingService} from "../xxx-common/xxx-loading/xxx-loading.service";
+import { XxxLoadingService } from "../xxx-common/xxx-loading/xxx-loading.service";
 
 @Injectable()
 export class XxxUserEffects {
+  private actions$: Actions = inject(Actions);
+  private router: Router = inject(Router);
+  private store: Store = inject(Store);
+  private alertService: XxxAlertService = inject(XxxAlertService);
+  private loadingService: XxxLoadingService = inject(XxxLoadingService);
+  private userDataService: XxxUserDataService = inject(XxxUserDataService);
 
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
@@ -61,14 +67,4 @@ export class XxxUserEffects {
       filter((isUsersLoaded: boolean) => !isUsersLoaded),
       map(() => XxxUserActions.getUsers())
     ));
-
-  constructor(
-    private actions$: Actions,
-    private router: Router,
-    private store: Store,
-    private alertService: XxxAlertService,
-    private loadingService: XxxLoadingService,
-    private userDataService: XxxUserDataService,
-  ) {
-  }
 }

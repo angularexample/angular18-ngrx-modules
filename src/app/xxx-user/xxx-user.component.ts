@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Observable} from "rxjs";
-import {XxxContent} from "../xxx-common/xxx-content/xxx-content.types";
-import {XxxContentFacadeService} from "../xxx-common/xxx-content/xxx-content-facade.service";
-import {XxxUser} from "./xxx-user.types";
-import {XxxUserFacadeService} from "./xxx-user-facade.service";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Observable } from "rxjs";
+import { XxxContent } from "../xxx-common/xxx-content/xxx-content.types";
+import { XxxContentFacadeService } from "../xxx-common/xxx-content/xxx-content-facade.service";
+import { XxxUser } from "./xxx-user.types";
+import { XxxUserFacadeService } from "./xxx-user-facade.service";
 
 @Component({
   selector: 'app-xxx-user',
@@ -12,22 +12,22 @@ import {XxxUserFacadeService} from "./xxx-user-facade.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XxxUserComponent {
-  contentKey: string = 'user';
-  content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
-  isUsersEmpty$: Observable<boolean> = this.userFacade.isUsersEmpty$;
-  isUsersLoaded$: Observable<boolean> = this.userFacade.isUsersLoaded$;
-  isUsersLoading$: Observable<boolean> = this.userFacade.isUsersLoading$;
-  selectedUserId$: Observable<number | undefined> = this.userFacade.selectedUserId$;
-  users$: Observable<XxxUser[]> = this.userFacade.users$;
+  private contentFacade: XxxContentFacadeService = inject(XxxContentFacadeService);
+  private userFacade: XxxUserFacadeService = inject(XxxUserFacadeService);
+  protected readonly contentKey: string = 'user';
+  protected readonly content$: Observable<XxxContent | undefined> = this.contentFacade.contentByKey$(this.contentKey);
+  protected readonly isUsersEmpty$: Observable<boolean> = this.userFacade.isUsersEmpty$;
+  protected readonly isUsersLoaded$: Observable<boolean> = this.userFacade.isUsersLoaded$;
+  protected readonly isUsersLoading$: Observable<boolean> = this.userFacade.isUsersLoading$;
+  protected readonly selectedUserId$: Observable<number | undefined> = this.userFacade.selectedUserId$;
+  protected readonly users$: Observable<XxxUser[]> = this.userFacade.users$;
 
-  constructor(
-    private contentFacade: XxxContentFacadeService,
-    private userFacade: XxxUserFacadeService) {
+  constructor() {
     this.contentFacade.getContent(this.contentKey)
     this.userFacade.dispatchShowUsers();
   }
 
-  rowClick(user: XxxUser) {
+  protected rowClick(user: XxxUser): void {
     this.userFacade.dispatchSelectUser(user.id);
   }
 }

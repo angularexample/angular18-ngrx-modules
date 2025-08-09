@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
-import {XxxHeaderComponent} from "./xxx-header.component";
-import {RouterLinkActive, RouterLink} from "@angular/router";
+import { XxxHeaderComponent } from "./xxx-header.component";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 
 @NgModule({
-    declarations: [XxxHeaderComponent],
+  declarations: [XxxHeaderComponent],
   imports: [
     RouterLink,
     RouterLinkActive
   ],
-    exports: [
-        XxxHeaderComponent
-    ]
+  exports: [
+    XxxHeaderComponent
+  ]
 })
-export class XxxHeaderModule { }
+export class XxxHeaderModule {
+}

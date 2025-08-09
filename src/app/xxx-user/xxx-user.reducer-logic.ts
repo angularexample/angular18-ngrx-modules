@@ -1,4 +1,4 @@
-import {XxxUser, XxxUserApiResponse, XxxUserState} from "./xxx-user.types";
+import { XxxUser, XxxUserApiResponse, XxxUserState } from "./xxx-user.types";
 
 export const xxxGetUsers = (state: XxxUserState) => {
   return {
@@ -23,7 +23,7 @@ export const xxxGetUsersSuccess = (state: XxxUserState, action: { payload: XxxUs
     users,
   }
 }
-export const xxxSelectUser = (state: XxxUserState, action: {userId: number}) => {
+export const xxxSelectUser = (state: XxxUserState, action: { userId: number }) => {
   return {
     ...state,
     selectedUserId: action.userId

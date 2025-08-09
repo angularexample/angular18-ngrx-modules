@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
-import {Observable, tap} from "rxjs";
-import {RouteConfigLoadEnd, RouteConfigLoadStart, Router} from "@angular/router";
-import {XxxLoadingService} from "./xxx-loading.service";
+import { ChangeDetectionStrategy, Component, ContentChild, inject, Input, OnInit, TemplateRef } from '@angular/core';
+import { Observable, tap } from "rxjs";
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from "@angular/router";
+import { XxxLoadingService } from "./xxx-loading.service";
 
 /*
 To turn off loading for certain http requests, set the context as in this example
@@ -29,15 +29,11 @@ add the attribute to the loading element as in this example
 export class XxxLoadingComponent implements OnInit {
   @ContentChild("loading") customLoadingIndicator: TemplateRef<any> | null = null;
   @Input() detectRouteTransitions = false;
-  loading$: Observable<boolean>;
+  private loadingService: XxxLoadingService = inject(XxxLoadingService);
+  protected readonly loading$: Observable<boolean> = this.loadingService.loading$;
+  private router: Router = inject(Router);
 
-  constructor(
-    private loadingService: XxxLoadingService,
-    private router: Router) {
-    this.loading$ = this.loadingService.loading$;
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.detectRouteTransitions) {
       this.router.events
         .pipe(

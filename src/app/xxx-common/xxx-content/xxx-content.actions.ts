@@ -1,5 +1,5 @@
-import {createAction, props} from '@ngrx/store';
-import {XxxContent, xxxContentFeatureName} from "./xxx-content.types";
+import { createAction, props } from '@ngrx/store';
+import { XxxContent, xxxContentFeatureName } from "./xxx-content.types";
 
 export const getContent = createAction(
   `${xxxContentFeatureName}.getContent`,
