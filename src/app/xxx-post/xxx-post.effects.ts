@@ -46,7 +46,7 @@ export class XxxPostEffects {
   selectPost$ = createEffect(() => this.actions$.pipe(
       ofType(XxxPostActions.selectPost),
       tap(() => {
-        this.router.navigateByUrl('/post/edit')
+        void this.router.navigateByUrl('/post/edit')
       })
     ), {dispatch: false}
   );
@@ -80,7 +80,7 @@ export class XxxPostEffects {
       ofType(XxxPostActions.updatePostSuccess),
       tap(() => {
         this.xxxAlertService.showInfo('Successfully updated post');
-        this.router.navigateByUrl('/post')
+        void this.router.navigateByUrl('/post')
       })
     ), {dispatch: false}
   );

@@ -54,7 +54,7 @@ export class XxxUserEffects {
   selectUser$ = createEffect(() => this.actions$.pipe(
       ofType(XxxUserActions.selectUser),
       tap(() => {
-        this.router.navigateByUrl('/post')
+        void this.router.navigateByUrl('/post')
       })
     ), {dispatch: false}
   );
